@@ -5,9 +5,35 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprites name="Explore Mode">
+      <sprite>sprites\spr_player</sprite>
+      <sprites name="Obstacles">
+        <sprite>sprites\spr_tree</sprite>
+      </sprites>
+    </sprites>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="player">
+      <script>scripts\movePlayer.gml</script>
+    </scripts>
+  </scripts>
+  <objects name="objects">
+    <object>objects\obj_global_controller</object>
+    <objects name="Explore Mode">
+      <objects name="Obstacles">
+        <object>objects\obj_obstacle</object>
+        <object>objects\obj_tree</object>
+      </objects>
+      <object>objects\obj_player</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\Initialise</room>
+    <room>rooms\test_explore</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>

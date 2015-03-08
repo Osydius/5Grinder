@@ -76,7 +76,7 @@
     <option_freeze>false</option_freeze>
     <option_frequency>0</option_frequency>
     <option_frontimage>nil</option_frontimage>
-    <option_fullscreen>True</option_fullscreen>
+    <option_fullscreen>False</option_fullscreen>
     <option_gameguid>{0E93923E-1D1B-478F-A037-68F06797EA57}</option_gameguid>
     <option_gameid>841513807</option_gameid>
     <option_haptic_effects>0</option_haptic_effects>
@@ -328,7 +328,7 @@
     <option_win8_store_logo>Configs\Default\Windows8\logos\logo50.png</option_win8_store_logo>
     <option_win8_texture_page>1024</option_win8_texture_page>
     <option_win8_wide_logo>Configs\Default\Windows8\logos\logo310.png</option_win8_wide_logo>
-    <option_windowcolor>clBlack</option_windowcolor>
+    <option_windowcolor>clSilver</option_windowcolor>
     <option_windows_build_version>0</option_windows_build_version>
     <option_windows_company_info>5Grinder</option_windows_company_info>
     <option_windows_copyright_info></option_windows_copyright_info>
