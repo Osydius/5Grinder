@@ -6,15 +6,27 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+<<<<<<< HEAD
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_ranged</sprite>
     <sprite>sprites\spr_techmage</sprite>
     <sprite>sprites\spr_shieldsman</sprite>
     <sprite>sprites\spr_buffer</sprite>
+=======
+    <sprites name="Explore Mode">
+      <sprite>sprites\spr_player</sprite>
+      <sprites name="Obstacles">
+        <sprite>sprites\spr_tree</sprite>
+        <sprite>sprites\spr_water</sprite>
+        <sprite>sprites\spr_rock</sprite>
+      </sprites>
+    </sprites>
+>>>>>>> origin/master
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+<<<<<<< HEAD
     <script>scripts\scr_drawGrid.gml</script>
     <script>scripts\scr_checkGridPositionX.gml</script>
     <script>scripts\scr_checkGridPositionY.gml</script>
@@ -37,6 +49,27 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_battle</room>
+=======
+    <scripts name="player">
+      <script>scripts\movePlayer.gml</script>
+    </scripts>
+  </scripts>
+  <objects name="objects">
+    <object>objects\obj_global_controller</object>
+    <objects name="Explore Mode">
+      <objects name="Obstacles">
+        <object>objects\obj_obstacle</object>
+        <object>objects\obj_tree</object>
+        <object>objects\obj_water</object>
+        <object>objects\obj_rock</object>
+      </objects>
+      <object>objects\obj_player</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\Initialise</room>
+    <room>rooms\test_explore</room>
+>>>>>>> origin/master
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
