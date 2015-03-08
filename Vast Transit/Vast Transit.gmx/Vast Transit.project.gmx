@@ -10,6 +10,8 @@
       <sprite>sprites\spr_player</sprite>
       <sprites name="Obstacles">
         <sprite>sprites\spr_tree</sprite>
+        <sprite>sprites\spr_water</sprite>
+        <sprite>sprites\spr_rock</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -26,6 +28,8 @@
       <objects name="Obstacles">
         <object>objects\obj_obstacle</object>
         <object>objects\obj_tree</object>
+        <object>objects\obj_water</object>
+        <object>objects\obj_rock</object>
       </objects>
       <object>objects\obj_player</object>
     </objects>
