@@ -6,7 +6,6 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-<<<<<<< HEAD
     <sprite>sprites\spr_melee</sprite>
     <sprite>sprites\spr_ranged</sprite>
     <sprite>sprites\spr_techmage</sprite>
