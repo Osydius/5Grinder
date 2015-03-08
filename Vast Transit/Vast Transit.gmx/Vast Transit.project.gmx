@@ -11,7 +11,6 @@
     <sprite>sprites\spr_techmage</sprite>
     <sprite>sprites\spr_shieldsman</sprite>
     <sprite>sprites\spr_buffer</sprite>
-=======
     <sprites name="Explore Mode">
       <sprite>sprites\spr_player</sprite>
       <sprites name="Obstacles">
@@ -20,40 +19,32 @@
         <sprite>sprites\spr_rock</sprite>
       </sprites>
     </sprites>
->>>>>>> origin/master
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-<<<<<<< HEAD
+    <script>scripts\movePlayer.gml</script>
     <script>scripts\scr_drawGrid.gml</script>
     <script>scripts\scr_checkGridPositionX.gml</script>
     <script>scripts\scr_checkGridPositionY.gml</script>
     <script>scripts\scr_drawUnits.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_battleController</object>
-    <object>objects\obj_melee</object>
-    <object>objects\obj_ranged</object>
-    <object>objects\obj_techmage</object>
-    <object>objects\obj_shieldsman</object>
-    <object>objects\obj_buffer</object>
-    <objects name="ActionBar">
-      <object>objects\obj_bufferbutton</object>
-      <object>objects\obj_shieldsmanbutton</object>
-      <object>objects\obj_techmagebutton</object>
-      <object>objects\obj_rangedbutton</object>
-      <object>objects\obj_meleebutton</object>
+    <objects name="Battle Mode">
+      <object>objects\obj_battleController</object>
+      <object>objects\obj_shieldsman</object>
+      <object>objects\obj_melee</object>
+      <object>objects\obj_ranged</object>
+      <object>objects\obj_buffer</object>
+      <object>objects\obj_techmage</object>
+      <objects name="ActionBar">
+        <object>objects\obj_bufferbutton</object>
+        <object>objects\obj_shieldsmanbutton</object>
+        <object>objects\obj_techmagebutton</object>
+        <object>objects\obj_rangedbutton</object>
+        <object>objects\obj_meleebutton</object>
+      </objects>
     </objects>
-  </objects>
-  <rooms name="rooms">
-    <room>rooms\rm_battle</room>
-=======
-    <scripts name="player">
-      <script>scripts\movePlayer.gml</script>
-    </scripts>
-  </scripts>
-  <objects name="objects">
     <object>objects\obj_global_controller</object>
     <objects name="Explore Mode">
       <objects name="Obstacles">
@@ -67,8 +58,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\Initialise</room>
+    <room>rooms\rm_battle</room>
     <room>rooms\test_explore</room>
->>>>>>> origin/master
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

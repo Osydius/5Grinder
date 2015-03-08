@@ -75,4 +75,3 @@ if obj_player.move_timer == 0 {
     obj_player.move_timer -= 1;
 }
 
-
