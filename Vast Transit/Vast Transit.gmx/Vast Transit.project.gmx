@@ -28,6 +28,9 @@
     <script>scripts\scr_checkGridPositionX.gml</script>
     <script>scripts\scr_checkGridPositionY.gml</script>
     <script>scripts\scr_drawUnits.gml</script>
+    <script>scripts\scr_createActionBar.gml</script>
+    <script>scripts\scr_drawSelected.gml</script>
+    <script>scripts\scr_colourSpace.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="Battle Mode">
@@ -38,6 +41,7 @@
       <object>objects\obj_buffer</object>
       <object>objects\obj_techmage</object>
       <objects name="ActionBar">
+        <object>objects\obj_actionBar</object>
         <object>objects\obj_bufferbutton</object>
         <object>objects\obj_shieldsmanbutton</object>
         <object>objects\obj_techmagebutton</object>
@@ -58,8 +62,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\Initialise</room>
-    <room>rooms\rm_battle</room>
     <room>rooms\test_explore</room>
+    <room>rooms\rm_battle</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
