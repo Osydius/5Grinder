@@ -35,7 +35,13 @@ for (i = 0; i&lt;6;i++)
     }
 }
 
-selected = 0
+selected = ""
+meleeplaced = 0
+rangedplaced = 0
+techmageplaced = 0
+shieldsmanplaced = 0
+bufferplaced = 0
+actionbar = instance_create(0,0,obj_actionBar)
 </string>
           </argument>
         </arguments>
@@ -82,10 +88,44 @@ selected = 0
           <argument>
             <kind>1</kind>
             <string>
-if scr_checkGridPositionX(mouse_x) &gt;= 0 and scr_checkGridPositionY(mouse_y) &gt;= 0
+    
+    
+if scr_checkGridPositionX(mouse_x) != -1 and scr_checkGridPositionY(mouse_y) != -1
 {
-    grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-500,-500,obj_melee)
+    if (not selected = "") and (grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = 0)
+    {
+        if selected = "melee"
+        {
+            grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-200,-200,obj_melee)
+            selected = ""
+            meleeplaced = 1
+        }
+        if selected = "ranged"
+        {
+            grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-200,-200,obj_ranged)
+            selected = ""
+            rangedplaced = 1
+        }
+        if selected = "techmage"
+        {
+            grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-200,-200,obj_techmage)
+            selected = ""
+            techmageplaced = 1
+        }
+        if selected = "shieldsman"
+        {
+            grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-200,-200,obj_shieldsman)
+            selected = ""
+            shieldsmanplaced = 1
+        }
+        if selected = "buffer"
+        {
+            grid[scr_checkGridPositionX(mouse_x),scr_checkGridPositionY(mouse_y)] = instance_create(-200,-200,obj_buffer)
+            selected = ""
+            bufferplaced = 1
+        }
     }
+}
 </string>
           </argument>
         </arguments>
@@ -110,8 +150,8 @@ if scr_checkGridPositionX(mouse_x) &gt;= 0 and scr_checkGridPositionY(mouse_y) &
             <kind>1</kind>
             <string>scr_drawGrid(room_width,room_height)
 scr_drawUnits(grid)
-draw_text(10,10,scr_checkGridPositionX(mouse_x))
-draw_text(50,10,scr_checkGridPositionY(mouse_y))
+scr_drawSelected(grid,selected)
+draw_text(10,10,selected)
 </string>
           </argument>
         </arguments>
