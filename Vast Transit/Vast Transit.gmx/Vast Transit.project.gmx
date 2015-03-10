@@ -6,28 +6,45 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_melee</sprite>
-    <sprite>sprites\spr_ranged</sprite>
-    <sprite>sprites\spr_techmage</sprite>
-    <sprite>sprites\spr_shieldsman</sprite>
-    <sprite>sprites\spr_buffer</sprite>
     <sprites name="Explore Mode">
       <sprite>sprites\spr_player</sprite>
       <sprites name="Obstacles">
         <sprite>sprites\spr_tree</sprite>
         <sprite>sprites\spr_water</sprite>
         <sprite>sprites\spr_rock</sprite>
+        <sprite>sprites\spr_wall</sprite>
+        <sprite>sprites\spr_window</sprite>
       </sprites>
+      <sprites name="Transition Areas">
+        <sprite>sprites\spr_door</sprite>
+        <sprite>sprites\spr_clearing</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="Battle Mode">
+      <sprite>sprites\spr_melee</sprite>
+      <sprite>sprites\spr_ranged</sprite>
+      <sprite>sprites\spr_buffer</sprite>
+      <sprite>sprites\spr_shieldsman</sprite>
+      <sprite>sprites\spr_techmage</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\movePlayer.gml</script>
-    <script>scripts\scr_drawGrid.gml</script>
-    <script>scripts\scr_checkGridPositionX.gml</script>
-    <script>scripts\scr_checkGridPositionY.gml</script>
-    <script>scripts\scr_drawUnits.gml</script>
+    <scripts name="Explore Mode">
+      <script>scripts\movePlayer.gml</script>
+      <script>scripts\createPlayerAtTransition.gml</script>
+    </scripts>
+    <scripts name="Battle Mode">
+      <scripts name="Draw Scripts">
+        <script>scripts\scr_drawUnits.gml</script>
+        <script>scripts\scr_drawGrid.gml</script>
+      </scripts>
+      <script>scripts\scr_checkGridPositionY.gml</script>
+      <script>scripts\scr_checkGridPositionX.gml</script>
+    </scripts>
+    <script>scripts\generateRoomMapping.gml</script>
+    <script>scripts\findRoomByString.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="Battle Mode">
@@ -52,14 +69,32 @@
         <object>objects\obj_tree</object>
         <object>objects\obj_water</object>
         <object>objects\obj_rock</object>
+        <object>objects\obj_wall</object>
+        <object>objects\obj_window</object>
       </objects>
       <object>objects\obj_player</object>
+      <objects name="Transition Areas">
+        <object>objects\obj_door</object>
+        <object>objects\obj_clearing</object>
+        <object>objects\obj_transition</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\Initialise</room>
     <room>rooms\rm_battle</room>
-    <room>rooms\test_explore</room>
+    <rooms name="Explore Mode">
+      <rooms name="Planet 1">
+        <room>rooms\planet1_hub</room>
+        <room>rooms\planet1_westForest1</room>
+        <room>rooms\planet1_southForest1</room>
+        <rooms name="planet1_hub">
+          <rooms name="building1">
+            <room>rooms\planet1_hub_building1_floor1</room>
+          </rooms>
+        </rooms>
+      </rooms>
+    </rooms>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -25,11 +25,31 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar exploreSpriteWidth;
+            <string>// global variables
+globalvar exploreSpriteWidth;
 globalvar exploreSpriteHeight;
+globalvar roomMapping;
+globalvar exploreLastRoom;
 
-exploreSpriteWidth = 32;
-exploreSpriteHeight = 32;
+
+// initialise global variables.
+global.exploreSpriteWidth = 32;
+global.exploreSpriteHeight = 32;
+
+global.roomMapping = generateRoomMapping();
+global.exploreLastRoom = 'planet1_southForest1';
+
+// Change this to test battle mode
+/*
+    if room_exists(findRoomByString('rm_battle')){
+        room_goto(findRoomByString('rm_battle'));
+    }
+*/
+
+// Change this to test explore mode
+if room_exists(findRoomByString('planet1_southForest1')){
+    room_goto(findRoomByString('planet1_southForest1'));
+}
 </string>
           </argument>
         </arguments>
@@ -52,12 +72,7 @@ exploreSpriteHeight = 32;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if room_exists(room_next(room)){
-    room_goto(room_next(room));
-}
-
-
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
