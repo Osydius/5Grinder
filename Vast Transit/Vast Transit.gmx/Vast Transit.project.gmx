@@ -39,9 +39,9 @@
       <scripts name="Draw Scripts">
         <script>scripts\scr_drawUnits.gml</script>
         <script>scripts\scr_drawGrid.gml</script>
-	<script>scripts\scr_drawSelected.gml</script>
-	<script>scripts\scr_colourSpace.gml</script>
-	<script>scripts\scr_createActionBar.gml</script>
+        <script>scripts\scr_drawSelected.gml</script>
+        <script>scripts\scr_colourSpace.gml</script>
+        <script>scripts\scr_createActionBar.gml</script>
       </scripts>
       <script>scripts\scr_checkGridPositionY.gml</script>
       <script>scripts\scr_checkGridPositionX.gml</script>
