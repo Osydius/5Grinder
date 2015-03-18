@@ -11,7 +11,7 @@ for (i = 0; i <5; i++)
     {
         if grid[i,j] != 0
         {
-            draw_sprite(grid[i,j].image_index,-1,10 + (xspacing * i), 10 + (yspacing * j))
+            draw_sprite(grid[i,j].image,-1,10 + (xspacing * i), 10 + (yspacing * j))
         }
     }
 }
@@ -22,7 +22,7 @@ for (i = 0; i <5; i++)
     {
         if grid[i,5+j] != 0
         {
-            draw_sprite(grid[i,5+j].image_index,-1,10 + (xspacing * i), 30 + (yspacing *  (5+j)))
+            draw_sprite(grid[i,5+j].image,-1,10 + (xspacing * i), 30 + (yspacing *  (5+j)))
         }
     }
 }
