@@ -19,6 +19,9 @@
         <sprite>sprites\spr_door</sprite>
         <sprite>sprites\spr_clearing</sprite>
       </sprites>
+      <sprites name="NPCs">
+        <sprite>sprites\spr_NPC1</sprite>
+      </sprites>
     </sprites>
     <sprites name="Battle Mode">
       <sprite>sprites\spr_melee</sprite>
@@ -34,14 +37,29 @@
     <scripts name="Explore Mode">
       <script>scripts\movePlayer.gml</script>
       <script>scripts\createPlayerAtTransition.gml</script>
+      <script>scripts\checkAdjacentLocation.gml</script>
+      <scripts name="Quest System">
+        <script>scripts\setUpQuests.gml</script>
+        <script>scripts\loadQuests.gml</script>
+        <script>scripts\saveQuests.gml</script>
+        <script>scripts\runQuest.gml</script>
+        <script>scripts\findSecondaryQuestInfo.gml</script>
+        <scripts name="Primary">
+          <script>scripts\primaryQuest1.gml</script>
+        </scripts>
+        <scripts name="Optional">
+          <script>scripts\optionalQuest1.gml</script>
+        </scripts>
+        <script>scripts\runQuests.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Battle Mode">
       <scripts name="Draw Scripts">
         <script>scripts\scr_drawUnits.gml</script>
         <script>scripts\scr_drawGrid.gml</script>
-	<script>scripts\scr_drawSelected.gml</script>
-	<script>scripts\scr_colourSpace.gml</script>
-	<script>scripts\scr_createActionBar.gml</script>
+        <script>scripts\scr_drawSelected.gml</script>
+        <script>scripts\scr_colourSpace.gml</script>
+        <script>scripts\scr_createActionBar.gml</script>
       </scripts>
       <script>scripts\scr_checkGridPositionY.gml</script>
       <script>scripts\scr_checkGridPositionX.gml</script>
@@ -81,6 +99,12 @@
         <object>objects\obj_door</object>
         <object>objects\obj_clearing</object>
         <object>objects\obj_transition</object>
+      </objects>
+      <objects name="NPCs">
+        <object>objects\obj_NPC</object>
+        <objects name="Secondary">
+          <object>objects\obj_NPC1</object>
+        </objects>
       </objects>
     </objects>
   </objects>

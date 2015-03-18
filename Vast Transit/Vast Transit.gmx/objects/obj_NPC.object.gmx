@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,35 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// global variables
-globalvar exploreSpriteWidth;
-globalvar exploreSpriteHeight;
-globalvar roomMapping;
-globalvar exploreLastRoom;
-
-
-// initialise global variables.
-global.exploreSpriteWidth = 32;
-global.exploreSpriteHeight = 32;
-
-global.roomMapping = generateRoomMapping();
-global.exploreLastRoom = 'planet1_southForest1';
-
-// set up inital quests
-setUpQuests();
-
-// Change this to test battle mode
-    /*
-    if room_exists(findRoomByString('rm_battle')){
-        room_goto(findRoomByString('rm_battle'));
-    }
-    */
-
-// Change this to test explore mode
-
-    if room_exists(findRoomByString('planet1_southForest1')){
-        room_goto(findRoomByString('planet1_southForest1'));
-    }
+            <string>forQuest = "";
+optional = false;
+quotes = ds_list_create();
 </string>
           </argument>
         </arguments>
@@ -76,7 +50,26 @@ setUpQuests();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>if (keyboard_check(vk_space)){
+    // check player is in proximity of the player
+    if(checkAdjacentLocation(x,y,obj_player) == "left"){
+        // check the player is facing the npc
+        if (obj_player.face_direction == "right" ) {
+            // check if there is an asscociated quest
+            if (forQuest != "") {
+                runQuest(forQuest,optional);
+            } else {
+                // if quotes exist displayer a random quote
+                if !ds_list_empty(quotes) {
+                    var randomQuoteIndex = floor(random_range(0,ds_list_size(quotes)));
+                    var quote = ds_list_find_value(quotes,randomQuoteIndex);
+                    //display quote here
+                }
+            }
+        }
+    }
+}
+</string>
           </argument>
         </arguments>
       </action>

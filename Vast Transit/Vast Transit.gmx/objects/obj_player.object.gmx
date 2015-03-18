@@ -31,6 +31,10 @@ set_move_timer = 7;
 
 face_direction = 'down';
 
+primaryQuest = ds_map_create();
+secondaryQuests = ds_list_create();
+loadQuests();
+
 if !view_visible[0] {
     view_visible[0] = true;
     view_enabled = true;
@@ -60,7 +64,14 @@ if !view_visible[0] {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>movePlayer()
+            <string>movePlayer();
+
+//testing quests
+if keyboard_check(ord('J')){
+    loadQuests();
+}
+
+
 </string>
           </argument>
         </arguments>
@@ -84,13 +95,13 @@ if !view_visible[0] {
           <argument>
             <kind>1</kind>
             <string>if face_direction == 'up' {
-    draw_sprite(spr_player,3,x,y,)
+    draw_sprite(spr_player,3,x,y,);
 } else if face_direction == 'left' {
-    draw_sprite(spr_player,1,x,y,)
+    draw_sprite(spr_player,1,x,y,);
 } else if face_direction == 'down' {
-    draw_sprite(spr_player,0,x,y,)
+    draw_sprite(spr_player,0,x,y,);
 } else if face_direction == 'right' {
-    draw_sprite(spr_player,2,x,y,)
+    draw_sprite(spr_player,2,x,y,);
 }
 </string>
           </argument>
