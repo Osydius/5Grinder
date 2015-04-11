@@ -26,8 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>client = network_create_socket (network_socket_tcp)
-//network_connect( client, "92.232.198.126", 6510) //connect globally
-network_connect( client, "192.168.0.6", 6510) // connect locally
+network_connect( client, "92.232.198.126", 6510)
 buff = buffer_create( 256, buffer_grow, 1)
 
 clients_name = ds_list_create()
@@ -74,6 +73,7 @@ buffer_write(buff , buffer_s16, selfhealth)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
 login=1
+
 </string>
           </argument>
         </arguments>
@@ -187,7 +187,7 @@ network_send_packet( client, buff, buffer_size )
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="0">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -204,7 +204,7 @@ network_send_packet( client, buff, buffer_size )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if login=1
+            <string>if login = 1
     {
     buffer_seek(buff, buffer_seek_start, 0)
     buffer_write(buff , buffer_string, "client_create_bullet")
@@ -212,8 +212,6 @@ network_send_packet( client, buff, buffer_size )
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
-    
-    
 </string>
           </argument>
         </arguments>
@@ -271,6 +269,7 @@ network_send_packet( client, buff, buffer_size )
             show_message("Welcome "+client_name+"!")
             }
         }
+  
     else if buff_info="all_create_bullet"
         {
         create_x = buffer_read(net_buff , buffer_s16)
