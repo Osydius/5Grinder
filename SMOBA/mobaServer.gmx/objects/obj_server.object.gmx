@@ -135,13 +135,13 @@ else
         ds_list_replace(clients_y, index, b_y)
         ds_list_replace(clients_health, index, b_health)
         }
-        
+    
     else if buff_info="client_create_bullet"
         {
             index=ds_list_find_index( clients_sockets, sock)
             b_direction=buffer_read(net_buff , buffer_s16 )
-            create_x = ds_list_find_value(client_x,index)
-            create_y = ds_list_find_value(client_y, index)
+            create_x = ds_list_find_value(clients_x,index)
+            create_y = ds_list_find_value(clients_y, index)
             createBullet(create_x,create_y,b_direction)
         }
     
@@ -175,7 +175,9 @@ else
         ds_list_add(clients_health,b_health)
         //show_message(b_name+" joined at pos x:"+string(b_x)+" y:"+string(b_y))
         //show_message("list sizes, socket="+string(ds_list_size(clients_sockets))+" name="+string(ds_list_size(clients_name))+" x="+string(ds_list_size(clients_x))+" y="+string(ds_list_size(clients_y)))
-        }        
+        }     
+    
+    
     }
 </string>
           </argument>
