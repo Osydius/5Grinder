@@ -275,7 +275,7 @@ if count&gt;0
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_middle)
                 draw_text(xx,yy-32,name)
-                draw_text(xx,yy+50,selfhealth)
+                draw_text(xx,yy+50,zz)
                 }
             }
     }
