@@ -178,17 +178,17 @@ else
     buff_info = buffer_read(net_buff , buffer_string ) 
     sock = ds_map_find_value(async_load, "id")
     
-    if buff_info="client_status"//client stats
-        {
-            readClientStatus(net_buff, sock);
-        }
-    
-    else if buff_info="client_create_bullet"
-        {
-            readClientCreateBullet(net_buff, sock);
-        }
-    else if buff_info="get_teams" {
+    if buff_info="client_status"{
+        readClientStatus(net_buff, sock);
+        
+    } else if buff_info="client_create_bullet"{
+        readClientCreateBullet(net_buff, sock);
+            
+    } else if buff_info="get_teams" {
         sendTeams(net_buff, sock);
+        
+    } else if buff_info="client_destroy_bullet"{
+        readClientDestroyBullet(net_buff, sock);
     }
     
     else if buff_info="check_name"//check if name exists

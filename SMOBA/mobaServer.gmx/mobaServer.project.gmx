@@ -14,6 +14,7 @@
       <scripts name="read">
         <script>scripts\readClientStatus.gml</script>
         <script>scripts\readClientCreateBullet.gml</script>
+        <script>scripts\readClientDestroyBullet.gml</script>
       </scripts>
       <scripts name="write">
         <script>scripts\sendAllBullets.gml</script>
