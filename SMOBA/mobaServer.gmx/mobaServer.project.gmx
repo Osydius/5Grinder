@@ -10,6 +10,17 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\createBullet.gml</script>
+    <scripts name="bufferEvents">
+      <scripts name="read">
+        <script>scripts\readClientStatus.gml</script>
+        <script>scripts\readClientCreateBullet.gml</script>
+      </scripts>
+      <scripts name="write">
+        <script>scripts\sendAllBullets.gml</script>
+        <script>scripts\sendAllClientStatus.gml</script>
+      </scripts>
+      <script>scripts\findClient.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_server</object>

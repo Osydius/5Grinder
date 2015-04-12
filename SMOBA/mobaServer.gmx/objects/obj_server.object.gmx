@@ -35,6 +35,10 @@ clients_name = ds_list_create() //this will store all players names
 clients_x = ds_list_create() //this will store all players x pos
 clients_y = ds_list_create() //this will store all players y pos
 clients_health = ds_list_create() // this will store all the players health
+
+// create object lists
+clients = ds_map_create();
+bullets = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -57,28 +61,17 @@ clients_health = ds_list_create() // this will store all the players health
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>count = ds_list_size(clients_sockets)
-if count&gt;0
-    {
-    buffer_seek(buff, buffer_seek_start, 0)
-    buffer_write(buff, buffer_string, "all_clients")
-    buffer_write(buff, buffer_s16, count)
-    for(i=0;i&lt;count;i++)
-        {
-        buffer_write(buff, buffer_string, string(ds_list_find_value(clients_name,i)) )//clients_name
-        buffer_write(buff, buffer_s16, ds_list_find_value(clients_x,i))//clients_x
-        buffer_write(buff, buffer_s16, ds_list_find_value(clients_y,i) )//clients_y
-        buffer_write(buff, buffer_s16, ds_list_find_value(clients_health,i) )//clients_health
-        }
-    var buffer_size = buffer_tell(buff);
-        
-    // Now send all data... to all clients
-    for(i=0;i&lt;count;i++)
-        {   
-        sock = ds_list_find_value(clients_sockets,i);
-        network_send_packet( sock, buff, buffer_size );
-        }
-    }
+            <string>// send client status info
+client_count = ds_list_size(clients_sockets);
+if client_count&gt;0{
+    sendAllClientStatus(buff, client_count);
+}
+
+// send bullet info
+bullet_count = ds_list_size(bullets);
+if bullet_count &gt; 0 {
+    sendAllBullets(buff, bullet_count);
+}
 </string>
           </argument>
         </arguments>
@@ -101,8 +94,8 @@ if count&gt;0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string> eventid = ds_map_find_value(async_load, "id")
-if server = eventid 
+            <string>eventid = ds_map_find_value(async_load, "id")
+if server = eventid
     {
     //disconnect of a client
     t = ds_map_find_value(async_load, "type");
@@ -127,22 +120,12 @@ else
     
     if buff_info="client_status"//client stats
         {
-        index=ds_list_find_index( clients_sockets, sock)
-        b_x=buffer_read(net_buff , buffer_s16 )
-        b_y=buffer_read(net_buff , buffer_s16 )
-        b_health=buffer_read(net_buff , buffer_s16 )
-        ds_list_replace(clients_x, index, b_x)
-        ds_list_replace(clients_y, index, b_y)
-        ds_list_replace(clients_health, index, b_health)
+            readClientStatus(net_buff, sock);
         }
     
     else if buff_info="client_create_bullet"
         {
-            index=ds_list_find_index( clients_sockets, sock)
-            b_direction=buffer_read(net_buff , buffer_s16 )
-            create_x = ds_list_find_value(clients_x,index)
-            create_y = ds_list_find_value(clients_y, index)
-            createBullet(create_x,create_y,b_direction)
+            readClientCreateBullet(net_buff, sock);
         }
     
     else if buff_info="check_name"//check if name exists
