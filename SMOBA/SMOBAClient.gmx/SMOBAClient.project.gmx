@@ -12,7 +12,6 @@
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_client</object>
-    <object>objects\obj_bullet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

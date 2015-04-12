@@ -44,6 +44,13 @@ selfhealth = 100
 direction = 0
 
 bullets = ds_map_create();
+
+player_x = 100
+player_y = 100
+player_speed = 5
+destination_x = 100
+destination_y = 100
+
 </string>
           </argument>
         </arguments>
@@ -69,8 +76,8 @@ bullets = ds_map_create();
             <string>buffer_seek(buff, buffer_seek_start, 0)
 buffer_write(buff , buffer_string, "client_setup")
 buffer_write(buff , buffer_string, client_name)
-buffer_write(buff , buffer_s16, x)
-buffer_write(buff , buffer_s16, y)
+buffer_write(buff , buffer_s16, player_x)
+buffer_write(buff , buffer_s16, player_y)
 buffer_write(buff , buffer_s16, selfhealth)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
@@ -130,14 +137,109 @@ network_send_packet( client, buff, buffer_size )
     {
     buffer_seek(buff, buffer_seek_start, 0)
     buffer_write(buff , buffer_string, "client_status")
-    buffer_write(buff , buffer_s16, mouse_x)
-    buffer_write(buff , buffer_s16, mouse_y)
+    buffer_write(buff , buffer_s16, player_x)
+    buffer_write(buff , buffer_s16, player_y)
     buffer_write(buff , buffer_s16, selfhealth)
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
     
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Movement</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var distance_x
+var distance_y
+var ratio_x
+var ratio_y
+
+if mouse_check_button(mb_right)
+{
+    destination_x = mouse_x
+    destination_y = mouse_y
+}
+
+if player_x &gt; destination_x
+{
+    repeat(player_speed)
+    {
+    if player_x != destination_x
+    
+    {
+        player_x -= 1
+    }
+    }
+}
+else
+{
+repeat(player_speed)
+    {
+    if player_x != destination_x
+    
+    {
+        player_x += 1
+    }
+    }
+}
+if player_y &gt; destination_y
+{
+    repeat(player_speed)
+    {
+    if player_y != destination_y
+    
+    {
+        player_y -= 1
+    }
+    }
+}
+else
+{
+repeat(player_speed)
+    {
+    if player_y != destination_y
+    
+    {
+        player_y += 1
+    }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -309,12 +411,6 @@ network_send_packet( client, buff, buffer_size )
                 
             }
             }
-        
-        //bullet_id = buffer_read(net_buff, buffer_s16)
-        //create_x = buffer_read(net_buff , buffer_s16)
-        //create_y = buffer_read(net_buff , buffer_s16)
-        //create_direction = buffer_read(net_buff , buffer_s16)
-        //instance_create(create_x,create_y,obj_bullet)
         }
     }
 </string>
@@ -375,8 +471,8 @@ if count&gt;0
         }
     } 
     
-draw_circle(mouse_x,mouse_y,10,false)
-draw_text(mouse_x,mouse_y + 50,selfhealth)
+draw_circle(player_x,player_y,10,false)
+draw_text(player_x,player_y + 50,selfhealth)
 </string>
           </argument>
         </arguments>
