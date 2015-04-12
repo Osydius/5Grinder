@@ -42,6 +42,8 @@ alarm[0]=10 //i've put 10 just to give some time for the clients to connect to t
 
 selfhealth = 100
 direction = 0
+
+bullets = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -270,12 +272,49 @@ network_send_packet( client, buff, buffer_size )
             }
         }
   
-    else if buff_info="all_create_bullet"
+    else if buff_info="all_bullets"
         {
-        create_x = buffer_read(net_buff , buffer_s16)
-        create_y = buffer_read(net_buff , buffer_s16)
-        create_direction = buffer_read(net_buff , buffer_s16)
-        instance_create(create_x,create_y,obj_bullet)
+        // empty bullet map
+        total_bullets = ds_map_size(bullets);
+        if total_bullets&gt;0
+            {
+            bullet_key = ds_map_find_first(bullets);
+            for(i=0;i&lt;total_bullets;i++){
+                bullet = ds_map_find_value(bullets,bullet_key);
+                ds_map_destroy(bullet);
+                bullet_key = ds_map_find_next(bullets, bullet_key);
+            }
+            }
+        ds_map_destroy(bullets);
+        bullets = ds_map_create()
+        
+        bullet_count = buffer_read(net_buff, buffer_s16);
+        if bullet_count&gt;0
+            {
+            for(i=0;i&lt;bullet_count;i++){
+                // get bullet info
+                create_id = buffer_read(net_buff, buffer_s16);
+                create_x = buffer_read(net_buff, buffer_s16);
+                create_y = buffer_read(net_buff, buffer_s16);
+                create_direction = buffer_read(net_buff, buffer_s16);
+                
+                // create bullet map
+                bullet = ds_map_create();
+                ds_map_add(bullet,"id",create_id);
+                ds_map_add(bullet,"x",create_x);
+                ds_map_add(bullet,"y",create_y);
+                ds_map_add(bullet,"direction",create_direction);
+                
+                ds_map_add(bullets,create_id,bullet);
+                
+            }
+            }
+        
+        //bullet_id = buffer_read(net_buff, buffer_s16)
+        //create_x = buffer_read(net_buff , buffer_s16)
+        //create_y = buffer_read(net_buff , buffer_s16)
+        //create_direction = buffer_read(net_buff , buffer_s16)
+        //instance_create(create_x,create_y,obj_bullet)
         }
     }
 </string>
@@ -319,6 +358,23 @@ if count&gt;0
                 }
             }
     }
+    
+b_count = ds_map_size(bullets)
+if count&gt;0
+    bullet_key = ds_map_find_first(bullets)
+    {
+    for(i=0;i&lt;b_count;i++)
+        {
+            bullet = ds_map_find_value(bullets,bullet_key)
+            bullet_key = ds_map_find_next(bullets,bullet_key)
+            bullet_id = ds_map_find_value(bullet,"id")
+            bullet_x = ds_map_find_value(bullet,"x")
+            bullet_y = ds_map_find_value(bullet,"y")
+            bullet_direction = ds_map_find_value(bullet,"direction")
+            draw_sprite(spr_bullet,-1,bullet_x,bullet_y)
+        }
+    } 
+    
 draw_circle(mouse_x,mouse_y,10,false)
 draw_text(mouse_x,mouse_y + 50,selfhealth)
 </string>
