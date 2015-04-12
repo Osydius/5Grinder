@@ -37,6 +37,7 @@ clients_y = ds_list_create() //this will store all players y pos
 clients_health = ds_list_create() // this will store all the players health
 
 // create object lists
+bullet_speed = 5
 bullets = ds_map_create();
 </string>
           </argument>
@@ -70,6 +71,51 @@ if client_count&gt;0{
 bullet_count = ds_map_size(bullets);
 if bullet_count &gt; 0 {
     sendAllBullets(buff, bullet_count);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// update bullets
+total_bullets = ds_map_size(bullets);
+if total_bullets&gt;0 {
+    bullet_key = ds_map_find_first(bullets);
+    for(i=0;i&lt;total_bullets;i++){
+        // get current bullet info
+        bullet = ds_map_find_value(bullets,bullet_key);
+        bullet_x = ds_map_find_value(bullet,"x");
+        bullet_y = ds_map_find_value(bullet,"y");
+        bullet_direction = ds_map_find_value(bullet,"direction");
+        
+        // calculate movement
+        bullet_new_x = bullet_speed * cos(degtorad(bullet_direction));
+        bullet_new_y = bullet_speed * sin(degtorad(bullet_direction));
+        
+        // update bullet info
+        ds_map_replace(bullet,"x",bullet_x + bullet_new_x);
+        ds_map_replace(bullet,"y",bullet_y + bullet_new_y);
+        
+        // get next bullet
+        bullet_key = ds_map_find_next(bullets,bullet_key);
+    }
 }
 </string>
           </argument>
