@@ -515,7 +515,7 @@ if count&gt;0
             xx=ds_list_find_value(clients_x,i)//x
             yy=ds_list_find_value(clients_y,i)//y
             zz=ds_list_find_value(clients_health,i)//health
-            team = ds_list_find_value(clients_team,i)//team
+            theirteam = ds_list_find_value(clients_team,i)//team
             if name != client_name
                 {
                 draw_circle(xx,yy,10,true)
@@ -523,7 +523,7 @@ if count&gt;0
                 draw_set_valign(fa_middle)
                 draw_text(xx,yy-32,name)
                 draw_text(xx,yy+50,zz)
-                draw_text(xx,yy+20,team)
+                draw_text(xx,yy+20,theirteam)
                 }
             }
     }
