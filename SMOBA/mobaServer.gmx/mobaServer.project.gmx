@@ -18,6 +18,7 @@
       <scripts name="write">
         <script>scripts\sendAllBullets.gml</script>
         <script>scripts\sendAllClientStatus.gml</script>
+        <script>scripts\sendTeams.gml</script>
       </scripts>
       <script>scripts\findClient.gml</script>
     </scripts>
