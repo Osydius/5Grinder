@@ -41,7 +41,7 @@ name_creation_phrase="Insert your character name :"// this will change case the 
 alarm[0]=10 //i've put 10 just to give some time for the clients to connect to the server before sending packets
 
 selfhealth = 100
-direction = 0
+click_direction = 0
 
 bullets = ds_map_create();
 
@@ -308,11 +308,76 @@ repeat(player_speed)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if login = 1
+            <string>var angle
+var point1_x = player_x
+var point1_y = player_y
+var point2_x = mouse_x
+var point2_y = mouse_y
+var adjacent = abs(player_x - mouse_x)
+var opposite = abs(player_y - mouse_y)
+
+if (adjacent != 0)
+{
+    angle = arctan2(opposite,adjacent)
+    angle = radtodeg(angle)
+}
+else
+{
+    if player_x &gt; mouse_x
+    {
+        angle = 270
+    }
+    else
+    {
+        angle = 90
+    }
+}
+
+if (point1_x &lt;= point2_x) &amp; (point1_y &gt;= point2_y)
+{
+    angle = 360 - angle
+}
+else if (point1_x &gt;= point2_x) &amp; (point1_y &lt;= point2_y)
+{
+    angle = 180 - angle
+}
+else if (point1_x &gt;= point2_x) &amp; (point1_y &gt;= point2_y)
+{
+    angle = 180 + angle
+}
+
+
+
+
+click_direction = angle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if login = 1
     {
     buffer_seek(buff, buffer_seek_start, 0)
     buffer_write(buff , buffer_string, "client_create_bullet")
-    buffer_write(buff , buffer_s16, direction)
+    buffer_write(buff , buffer_s16, click_direction)
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
