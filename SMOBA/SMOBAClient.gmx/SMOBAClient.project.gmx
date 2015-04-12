@@ -7,14 +7,22 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_bullet</sprite>
+    <sprite>sprites\spr_teamblue</sprite>
+    <sprite>sprites\spr_teamred</sprite>
+    <sprite>sprites\spr_serverconnect</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_client</object>
+    <object>objects\obj_teamblue</object>
+    <object>objects\obj_teamred</object>
+    <object>objects\obj_menusetup</object>
+    <object>objects\obj_serverenter</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <room>rooms\rm_menu</room>
+    <room>rooms\rm_server</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
