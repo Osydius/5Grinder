@@ -15,10 +15,12 @@ for(i=0;i<bullet_count;i++){
     bullet_x = ds_map_find_value(bullet,"x");
     bullet_y = ds_map_find_value(bullet,"y");
     bullet_direction = ds_map_find_value(bullet,"direction");
+    bullet_team = ds_map_find_value(bullet,"team");
     buffer_write(buff, buffer_u16, bullet_id);
     buffer_write(buff, buffer_s16, bullet_x);
     buffer_write(buff, buffer_s16, bullet_y);
     buffer_write(buff, buffer_s16, bullet_direction);
+    buffer_write(buff, buffer_string, bullet_team);
     bullet_key = ds_map_find_next(obj_server.bullets,bullet_key);
 }
 
