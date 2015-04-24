@@ -16,7 +16,11 @@ ds_map_add(bullet,"y",create_y);
 ds_map_add(bullet,"direction",create_direction);
 ds_map_add(bullet,"team",create_team);
 
-bullet_id = obj_server.bullet_count;
-obj_server.bullet_count+=1;
-ds_map_add(bullet,"id",bullet_id);
-ds_map_add(obj_server.bullets, bullet_id, bullet);
+//bullet_id = obj_server.bullet_count;
+//obj_server.bullet_count++;
+bullet_id = floor(random_range(0,65535));
+if !ds_map_find_value(obj_server.bullets,bullet_id){
+    ds_map_add(bullet,"id",bullet_id);
+    ds_map_add(obj_server.bullets, bullet_id, bullet);
+}
+
