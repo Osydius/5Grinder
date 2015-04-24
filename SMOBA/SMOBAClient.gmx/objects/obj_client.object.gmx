@@ -293,12 +293,13 @@ repeat(player_speed)
                 bullet = ds_map_find_value(bullets,bullet_key)
                 bullet_x = ds_map_find_value(bullet,"x")
                 bullet_y = ds_map_find_value(bullet,"y")
+                bullet_team = ds_map_find_value(bullet,"team")
                 
                 //collision
                 
                 if (bullet_x &gt; (player_x - 10)) &amp; (bullet_x &lt; (player_x + 10)) &amp; (bullet_y &gt; (player_y - 10)) &amp; (bullet_y &lt; (player_y + 10))
                 {
-                    if login = 1
+                    if login = 1 and (bullet_team != team)
                         {
                         buffer_seek(buff, buffer_seek_start, 0)
                         buffer_write(buff , buffer_string, "client_destroy_bullet")
@@ -434,6 +435,7 @@ if login = 1
     buffer_seek(buff, buffer_seek_start, 0)
     buffer_write(buff , buffer_string, "client_create_bullet")
     buffer_write(buff , buffer_s16, click_direction)
+    buffer_write(buff, buffer_string, team)
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
@@ -522,6 +524,7 @@ if login = 1
                 create_x = buffer_read(net_buff, buffer_s16);
                 create_y = buffer_read(net_buff, buffer_s16);
                 create_direction = buffer_read(net_buff, buffer_s16);
+                create_team = buffer_read(net_buff, buffer_string);
                 
                 // create bullet map
                 bullet = ds_map_create();
@@ -529,6 +532,7 @@ if login = 1
                 ds_map_add(bullet,"x",create_x);
                 ds_map_add(bullet,"y",create_y);
                 ds_map_add(bullet,"direction",create_direction);
+                ds_map_add(bullet,"team",create_team);
                 
                 ds_map_add(bullets,create_id,bullet);
                 
