@@ -44,6 +44,7 @@ clients_team = ds_list_create() // this will store all the players teams
 // create object lists
 bullet_speed = 5
 bullets = ds_map_create();
+bullet_count = 0;
 </string>
           </argument>
         </arguments>
@@ -131,6 +132,10 @@ if total_bullets&gt;0 {
         
         bullet_key = ds_map_find_next(bullets,bullet_key);
     }
+}
+
+if bullet_count = 65535 {
+    bullet_count = 0;
 }
 </string>
           </argument>
