@@ -41,10 +41,9 @@ clients_y = ds_list_create() //this will store all players y pos
 clients_health = ds_list_create() // this will store all the players health
 clients_team = ds_list_create() // this will store all the players teams
 
-// create object lists
+// create weapon lists
 bullet_speed = 5
 bullets = ds_map_create();
-bullet_count = 0;
 </string>
           </argument>
         </arguments>
@@ -213,9 +212,8 @@ else
         
     } else if buff_info="client_destroy_bullet"{
         readClientDestroyBullet(net_buff, sock);
-    }
     
-    else if buff_info="check_name"//check if name exists
+    } else if buff_info="check_name"//check if name exists
         {
         b_name=buffer_read(net_buff , buffer_string )
         count=ds_list_size(clients_name)
