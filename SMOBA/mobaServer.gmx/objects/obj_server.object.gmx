@@ -30,8 +30,6 @@ server = network_create_server(network_socket_tcp, 6510, 32)
 buff = buffer_create(16384, buffer_fixed, 1);
 
 // game information
-teams = ds_list_create();
-ds_list_add(teams,1,2);
 
 // create the memory spaces
 clients_sockets = ds_list_create() //this will store all players sockets, add it only in the server, it will be used for list index search
