@@ -312,8 +312,9 @@ repeat(player_speed)
                         if bullet{
                             ds_map_destroy(bullet);
                             ds_map_delete(bullets,bullet_key);
+                            selfhealth -= bullet_damage;
                         }
-                        selfhealth -= bullet_damage
+                        
                         }
                 }
                 bullet_key = ds_map_find_next(bullets,bullet_key)
