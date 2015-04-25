@@ -217,7 +217,7 @@ if mouse_check_button(mb_right)
 if player_x &gt; destination_x
 {
     repeat(ratio_x){
-        if (player_x != destination_x) and ( !collision_point(x - 1,y,obj_obstacle,1,0)){
+        if (player_x != destination_x) and place_free(player_x - 1, player_y){
             player_x -= 1
         }
     }
