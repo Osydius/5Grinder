@@ -51,6 +51,8 @@ player_y = 100
 player_speed = 5
 destination_x = 100
 destination_y = 100
+ratio_x = 0;
+ratio_y = 0;
 
 team = "teamred"
 damage = 10
@@ -193,29 +195,36 @@ network_send_packet( client, buff, buffer_size )
             <kind>1</kind>
             <string>var distance_x
 var distance_y
-var ratio_x
-var ratio_y
 
 if mouse_check_button(mb_right)
 {
     destination_x = mouse_x
     destination_y = mouse_y
+    adjacent = abs(player_x - destination_x);
+    opposite = abs(player_y - destination_y);
+    
+    if(adjacent != 0){
+        angle = arctan(opposite/adjacent);
+    } else {
+        angle = 0;
+    }
+    
+    ratio_x = floor(cos(angle)*player_speed);
+    ratio_y = floor(sin(angle)*player_speed);
+    
 }
 
 if player_x &gt; destination_x
 {
-    repeat(player_speed)
-    {
-    if (player_x != destination_x) and ( !collision_point(x - 1,y,obj_obstacle,1,0))
-    
-    {
-        player_x -= 1
-    }
+    repeat(ratio_x){
+        if (player_x != destination_x) and ( !collision_point(x - 1,y,obj_obstacle,1,0)){
+            player_x -= 1
+        }
     }
 }
 else
 {
-repeat(player_speed)
+repeat(ratio_x)
     {
     if (player_x != destination_x)and ( !collision_point(x + 1,y,obj_obstacle,1,0))
     
@@ -226,7 +235,7 @@ repeat(player_speed)
 }
 if (player_y &gt; destination_y)and ( !collision_point(x ,y - 1,obj_obstacle,1,0))
 {
-    repeat(player_speed)
+    repeat(ratio_y)
     {
     if player_y != destination_y
     
@@ -237,7 +246,7 @@ if (player_y &gt; destination_y)and ( !collision_point(x ,y - 1,obj_obstacle,1,0
 }
 else
 {
-repeat(player_speed)
+repeat(ratio_y)
     {
     if (player_y != destination_y)and ( !collision_point(x ,y + 1,obj_obstacle,1,0))
     
