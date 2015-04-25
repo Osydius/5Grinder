@@ -54,6 +54,7 @@ destination_y = 100
 
 team = "teamred"
 damage = 10
+lasthit = -1
 </string>
           </argument>
         </arguments>
@@ -292,6 +293,7 @@ repeat(player_speed)
             for(i=0;i&lt;total_bullets;i++)
                 {
                 bullet = ds_map_find_value(bullets,bullet_key)
+                bullet_id = ds_map_find_value(bullet,"id")
                 bullet_x = ds_map_find_value(bullet,"x")
                 bullet_y = ds_map_find_value(bullet,"y")
                 bullet_team = ds_map_find_value(bullet,"team")
@@ -301,7 +303,7 @@ repeat(player_speed)
                 
                 if (bullet_x &gt; (player_x - 10)) &amp; (bullet_x &lt; (player_x + 10)) &amp; (bullet_y &gt; (player_y - 10)) &amp; (bullet_y &lt; (player_y + 10))
                 {
-                    if login = 1 and (bullet_team != team)
+                    if login = 1 and (bullet_team != team) and (bullet_id != lasthit)
                         {
                         buffer_seek(buff, buffer_seek_start, 0)
                         buffer_write(buff , buffer_string, "client_destroy_bullet")
@@ -313,6 +315,7 @@ repeat(player_speed)
                             ds_map_destroy(bullet);
                             ds_map_delete(bullets,bullet_key);
                             selfhealth -= bullet_damage;
+                            lasthit = bullet_id
                         }
                         
                         }
