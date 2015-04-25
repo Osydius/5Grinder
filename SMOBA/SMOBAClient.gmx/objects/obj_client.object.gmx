@@ -206,7 +206,7 @@ if player_x &gt; destination_x
 {
     repeat(player_speed)
     {
-    if player_x != destination_x
+    if (player_x != destination_x) and ( !collision_point(x - 1,y,obj_obstacle,1,0))
     
     {
         player_x -= 1
@@ -217,14 +217,14 @@ else
 {
 repeat(player_speed)
     {
-    if player_x != destination_x
+    if (player_x != destination_x)and ( !collision_point(x + 1,y,obj_obstacle,1,0))
     
     {
         player_x += 1
     }
     }
 }
-if player_y &gt; destination_y
+if (player_y &gt; destination_y)and ( !collision_point(x ,y - 1,obj_obstacle,1,0))
 {
     repeat(player_speed)
     {
@@ -239,7 +239,7 @@ else
 {
 repeat(player_speed)
     {
-    if player_y != destination_y
+    if (player_y != destination_y)and ( !collision_point(x ,y + 1,obj_obstacle,1,0))
     
     {
         player_y += 1
@@ -324,6 +324,26 @@ repeat(player_speed)
                 }
             }
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Obstacle Collisions</string>
           </argument>
         </arguments>
       </action>
