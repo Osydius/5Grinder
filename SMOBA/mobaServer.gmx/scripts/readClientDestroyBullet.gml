@@ -9,4 +9,3 @@ if bullet {
     ds_map_destroy(bullet);
     ds_map_delete(obj_server.bullets,bullet_id);
 }
-
