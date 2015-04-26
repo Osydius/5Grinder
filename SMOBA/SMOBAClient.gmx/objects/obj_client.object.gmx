@@ -34,6 +34,8 @@ clients_x = ds_list_create()
 clients_y = ds_list_create()
 clients_health = ds_list_create()
 clients_team = ds_list_create()
+clients_captain = ds_list_create()
+clients_ship = ds_list_create()
 
 randomize() // This will create a random seed, it's just to make sure that randoms are random lol, it will be usefull for a random player name
 setup=1
@@ -57,6 +59,9 @@ ratio_y = 0;
 team = "teamred"
 damage = 10
 lasthit = -1
+captain = "captain"
+ship = "Cruiser"
+
 </string>
           </argument>
         </arguments>
@@ -86,6 +91,8 @@ buffer_write(buff , buffer_s16, player_x)
 buffer_write(buff , buffer_s16, player_y)
 buffer_write(buff , buffer_s16, selfhealth)
 buffer_write(buff , buffer_string, team)
+buffer_write(buff , buffer_string, captain)
+buffer_write(buff , buffer_string, ship)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
 login=1
@@ -147,7 +154,6 @@ network_send_packet( client, buff, buffer_size )
     buffer_write(buff , buffer_s16, player_x)
     buffer_write(buff , buffer_s16, player_y)
     buffer_write(buff , buffer_s16, selfhealth)
-    buffer_write(buff , buffer_string, team)
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
@@ -511,6 +517,8 @@ if login = 1
         ds_list_clear(clients_y)
         ds_list_clear(clients_health)
         ds_list_clear(clients_team)
+        ds_list_clear(clients_captain)
+        ds_list_clear(clients_ship)
         for(i=0;i&lt;count;i++)
             {
             ds_list_add(clients_name,buffer_read(net_buff , buffer_string ))
@@ -518,6 +526,8 @@ if login = 1
             ds_list_add(clients_y,buffer_read(net_buff , buffer_s16 ))
             ds_list_add(clients_health,buffer_read(net_buff , buffer_s16))
             ds_list_add(clients_team,buffer_read(net_buff , buffer_string))
+            ds_list_add(clients_captain,buffer_read(net_buff , buffer_string))
+            ds_list_add(clients_ship,buffer_read(net_buff , buffer_string))
             }
         }
     
