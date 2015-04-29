@@ -55,19 +55,32 @@ ship = "battleship"
             <kind>1</kind>
             <string>if room_get_name(room) = "rm_server"
 {
-    if teamred = 1 {
-        obj_client.team = "teamred"
+    if !instance_exists(obj_client){
+        client = instance_create(x,y,obj_client);
     } else {
-        obj_client.team = "teamblue"
+        client = instance_find(obj_client,0);
+    }
+    // set the team
+    if teamred = 1 {
+        client.team = "teamred"
+        client.player_x = instance_find(obj_lavaplanet,0).x;
+        client.player_y = instance_find(obj_lavaplanet,0).y;
+    } else {
+        client.team = "teamblue"
+        client.player_x = instance_find(obj_waterplanet,0).x;
+        client.player_y = instance_find(obj_waterplanet,0).y;
     }
     
-    obj_client.captain = captain;
-    obj_client.ship = ship;
+    // set the captain
+    client.captain = captain;
+    
+    // set the ship
+    client.ship = ship;
     
     if ship == "battleship" {
-        obj_client.sprite_index = spr_battleship;
+        client.sprite_index = spr_battleship;
     } else if ship == "recon" {
-        obj_client.sprite_index = spr_recon;
+        client.sprite_index = spr_recon;
     }
     
     instance_destroy()
