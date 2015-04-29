@@ -62,6 +62,7 @@ lasthit = -1
 captain = "captain"
 ship = "Cruiser"
 
+sprite_index = spr_player;
 </string>
           </argument>
         </arguments>
@@ -215,6 +216,7 @@ if mouse_check_button(mb_right)
         angle = 0;
     }
     
+    image_angle = point_direction(player_x,player_y,destination_x,destination_y) - 90;
     ratio_x = floor(cos(angle)*player_speed);
     ratio_y = floor(sin(angle)*player_speed);
     
@@ -426,48 +428,12 @@ repeat(ratio_y)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var angle
-var point1_x = player_x
+            <string>var point1_x = player_x
 var point1_y = player_y
 var point2_x = mouse_x
 var point2_y = mouse_y
-var adjacent = abs(player_x - mouse_x)
-var opposite = abs(player_y - mouse_y)
 
-if (adjacent != 0)
-{
-    angle = arctan2(opposite,adjacent)
-    angle = radtodeg(angle)
-}
-else
-{
-    if player_x &gt; mouse_x
-    {
-        angle = 270
-    }
-    else
-    {
-        angle = 90
-    }
-}
-
-if (point1_x &lt;= point2_x) &amp; (point1_y &gt;= point2_y)
-{
-    angle = 360 - angle
-}
-else if (point1_x &gt;= point2_x) &amp; (point1_y &lt;= point2_y)
-{
-    angle = 180 - angle
-}
-else if (point1_x &gt;= point2_x) &amp; (point1_y &gt;= point2_y)
-{
-    angle = 180 + angle
-}
-
-
-
-
-click_direction = angle
+click_direction = bulletAngle(point1_x,point1_y,point2_x,point2_y);
 
 
 
@@ -645,16 +611,11 @@ if count &gt; 0
             bullet_x = ds_map_find_value(bullet,"x")
             bullet_y = ds_map_find_value(bullet,"y")
             bullet_direction = ds_map_find_value(bullet,"direction")
-            draw_sprite(spr_bullet,-1,bullet_x,bullet_y)
+            draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,bullet_direction,0,1)
         }
     } 
     
-//draw_sprite(sprite_index,-1,player_x,player_y)
-if ship == "battleship" {
-    draw_sprite(spr_batlleship,-1,player_x-16,player_y-16);
-} else if ship == "recon" {
-    draw_sprite(spr_recon,-1,player_x-16,player_y-16);
-}
+draw_sprite_ext(sprite_index,-1,player_x,player_y,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 draw_text(player_x,player_y + 50,selfhealth)
 draw_text(player_x,player_y + 20,team)
 </string>

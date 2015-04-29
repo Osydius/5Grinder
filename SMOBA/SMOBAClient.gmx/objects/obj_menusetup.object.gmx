@@ -64,6 +64,12 @@ ship = "battleship"
     obj_client.captain = captain;
     obj_client.ship = ship;
     
+    if ship == "battleship" {
+        obj_client.sprite_index = spr_battleship;
+    } else if ship == "recon" {
+        obj_client.sprite_index = spr_recon;
+    }
+    
     instance_destroy()
 }
 </string>

@@ -27,6 +27,9 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\bulletAngle.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_menusetup</object>
     <object>objects\obj_client</object>

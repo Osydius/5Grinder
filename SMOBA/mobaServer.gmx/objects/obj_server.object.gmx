@@ -30,6 +30,8 @@ server = network_create_server(network_socket_tcp, 6510, 32)
 buff = buffer_create(16384, buffer_fixed, 1);
 
 // game information
+map_width = 1600;
+map_height = 768;
 
 // create the memory spaces
 clients_sockets = ds_list_create() //this will store all players sockets, add it only in the server, it will be used for list index search
@@ -111,7 +113,7 @@ if total_bullets&gt;0 {
         bullet_direction = ds_map_find_value(bullet,"direction");
         
         //check it isnt off the room
-        if bullet_x &lt; 0 || bullet_x &gt; room_width || bullet_y &lt; 0 || bullet_y &gt; room_height{
+        if bullet_x &lt; 0 || bullet_x &gt; map_width || bullet_y &lt; 0 || bullet_y &gt; map_height{
             ds_map_destroy(bullet);
             ds_map_delete(bullets,bullet_key);
         } else {
