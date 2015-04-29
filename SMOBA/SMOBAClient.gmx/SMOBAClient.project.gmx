@@ -22,6 +22,8 @@
       <sprite>sprites\spr_teamblue</sprite>
       <sprite>sprites\spr_serverconnect</sprite>
     </sprites>
+    <sprite>sprites\spr_waterplanet</sprite>
+    <sprite>sprites\spr_lavaplanet</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -44,6 +46,8 @@
       <object>objects\obj_reconship</object>
       <object>objects\obj_shipSelected</object>
     </objects>
+    <object>objects\obj_waterplanet</object>
+    <object>objects\obj_lavaplanet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_captain</room>
