@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>client = network_create_socket (network_socket_tcp)
-network_connect( client, "92.232.198.126", 6510)
+//network_connect( client, "92.232.198.126", 6510)
+network_connect( client, "81.99.254.162", 6510)
 buff = buffer_create( 256, buffer_grow, 1)
 
 clients_name = ds_list_create()
@@ -659,7 +660,7 @@ if count &gt; 0
             bullet_x = ds_map_find_value(bullet,"x")
             bullet_y = ds_map_find_value(bullet,"y")
             bullet_direction = ds_map_find_value(bullet,"direction")
-            draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,bullet_direction,0,1)
+            draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,(-bullet_direction) - 90 ,0,1)
         }
     } 
     
