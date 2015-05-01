@@ -26,16 +26,19 @@
       <sprite>sprites\spr_lavaplanet</sprite>
       <sprite>sprites\spr_waterplanet</sprite>
     </sprites>
+    <sprite>sprites\spr_map</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\bulletAngle.gml</script>
+    <scripts name="Abilities"/>
   </scripts>
   <objects name="objects">
     <object>objects\obj_menusetup</object>
     <object>objects\obj_client</object>
     <object>objects\obj_obstacle</object>
+    <object>objects\obj_map</object>
     <objects name="Team Menu">
       <object>objects\obj_teamblue</object>
       <object>objects\obj_teamred</object>
@@ -55,12 +58,14 @@
       <object>objects\obj_lavaplanet</object>
       <object>objects\obj_waterplanet</object>
     </objects>
+    <object>objects\obj_bullet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_captain</room>
     <room>rooms\rm_ship</room>
     <room>rooms\rm_team</room>
     <room>rooms\rm_server</room>
+    <room>rooms\rm_mapTest</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

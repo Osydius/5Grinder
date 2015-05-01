@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bullets = obj_client.bullets;
+            <string>/*
+bullets = obj_client.bullets;
 total_bullets = ds_map_size(bullets);
 bullet_key = ds_map_find_first(bullets);
 for(var i = 0; i &lt; total_bullets; i++){
@@ -49,6 +50,7 @@ for(var i = 0; i &lt; total_bullets; i++){
     
     bullet_key = ds_map_find_next(bullets,bullet_key);
 }   
+*/
 </string>
           </argument>
         </arguments>

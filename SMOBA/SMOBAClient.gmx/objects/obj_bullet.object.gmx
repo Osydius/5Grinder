@@ -25,14 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 10
-direction =0
+            <string>bullet_id= "";
+bullet_x = -1;
+bullet_y = -1;
+bullet_direction = 0;
+bullet_team = "";
+bullet_damage = 0;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="0">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,7 +53,42 @@ direction =0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy()
+            <string>if (collision_rectangle(x-1,y-5,x+1,y+5,obj_obstacle,true,true)){
+    if instance_exists(obj_client){
+        buff = obj_client.buff;
+        client = obj_client.client;
+        buffer_seek(buff, buffer_seek_start, 0)
+        buffer_write(buff , buffer_string, "client_destroy_bullet")
+        buffer_write(buff , buffer_u16, bullet_id)
+        buffer_size = buffer_tell(buff)
+        network_send_packet( client, buff, buffer_size )
+        ds_map_delete(obj_client.new_bullets,bullet_id);
+        instance_destroy();
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite_ext(spr_bullet,-1,x,y,1,1,bullet_direction,0,1);
 </string>
           </argument>
         </arguments>
