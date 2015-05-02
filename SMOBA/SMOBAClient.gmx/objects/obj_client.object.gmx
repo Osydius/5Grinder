@@ -37,6 +37,7 @@ clients_health = ds_list_create()
 clients_team = ds_list_create()
 clients_captain = ds_list_create()
 clients_ship = ds_list_create()
+clinets_rotation = ds_list_create()
 
 randomize() // This will create a random seed, it's just to make sure that randoms are random lol, it will be usefull for a random player name
 setup=1
@@ -163,6 +164,8 @@ network_send_packet( client, buff, buffer_size )
     buffer_write(buff , buffer_s16, player_x);
     buffer_write(buff , buffer_s16, player_y);
     buffer_write(buff , buffer_s16, selfhealth);
+    buffer_write(buff , buffer_s16, image_angle);
+    
     buffer_size = buffer_tell(buff);
     network_send_packet( client, buff, buffer_size );
 }
@@ -593,6 +596,7 @@ if login = 1
         ds_list_clear(clients_team)
         ds_list_clear(clients_captain)
         ds_list_clear(clients_ship)
+        ds_list_clear(clients_rotation)
         for(i=0;i&lt;count;i++)
             {
             ds_list_add(clients_name,buffer_read(net_buff , buffer_string ))
@@ -602,6 +606,7 @@ if login = 1
             ds_list_add(clients_team,buffer_read(net_buff , buffer_string))
             ds_list_add(clients_captain,buffer_read(net_buff , buffer_string))
             ds_list_add(clients_ship,buffer_read(net_buff , buffer_string))
+            ds_list_add(clients_rotation,buffer_read(net_buff , buffer_s16))
             }
         }
     
@@ -725,9 +730,11 @@ if count &gt; 0
             yy=ds_list_find_value(clients_y,i)//y
             zz=ds_list_find_value(clients_health,i)//health
             theirteam = ds_list_find_value(clients_team,i)//team
+            theirship = ds_list_find_value(clients_ship,i)//ship
+            theirrotation = ds_list_find_value(clients_rotation,i)//rotation
             if name != client_name
                 {
-                draw_circle(xx,yy,10,true)
+                draw_sprite_ext(theirship,-1,xx,yy,1,1,theirrotation,c_white,1)
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_middle)
                 draw_text(xx,yy-32,name)
