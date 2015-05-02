@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>client = network_create_socket (network_socket_tcp)
-//network_connect( client, "92.232.198.126", 6510)
-network_connect( client, "81.99.254.162", 6510)
+network_connect( client, "92.232.198.126", 6510) // James Server
+//network_connect( client, "81.99.254.162", 6510) // Casey Server
 buff = buffer_create( 256, buffer_grow, 1)
 
 clients_name = ds_list_create()

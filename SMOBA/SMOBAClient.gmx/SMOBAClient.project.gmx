@@ -32,7 +32,6 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\bulletAngle.gml</script>
-    <scripts name="Abilities"/>
   </scripts>
   <objects name="objects">
     <object>objects\obj_menusetup</object>
