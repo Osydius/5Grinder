@@ -88,7 +88,7 @@ bullet_damage = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_bullet,-1,x,y,1,1,-(bullet_direction),0,1);
+            <string>draw_sprite_ext(spr_bullet,-1,x,y,1,1,-(bullet_direction)+90,0,1);
 </string>
           </argument>
         </arguments>
