@@ -14,6 +14,7 @@ for(i=0;i<client_count;i++){
     buffer_write(buff, buffer_string, ds_list_find_value(clients_team,i) )//clients_health
     buffer_write(buff, buffer_string, ds_list_find_value(clients_captain, i) )
     buffer_write(buff, buffer_string, ds_list_find_value(clients_ship, i) )
+    buffer_write(buff, buffer_s16, ds_list_find_value(clients_direction, i) )
 }
 var buffer_size = buffer_tell(buff);
     

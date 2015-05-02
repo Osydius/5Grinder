@@ -42,6 +42,7 @@ clients_health = ds_list_create() // this will store all the players health
 clients_team = ds_list_create() // this will store all the players teams
 clients_captain = ds_list_create()
 clients_ship = ds_list_create()
+clients_direction = ds_list_create()
 
 // create weapon lists
 bullet_speed = 5
