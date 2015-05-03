@@ -727,13 +727,13 @@ if login = 1
             <kind>1</kind>
             <string>// **MOVE INTO SCRIPT** Minimap
 
-minimapwidth = (200 *(minimapscale / 100)) - 5;
-minimapheight = (200 *(minimapscale / 100)) - 5;
+minimapwidth = (200 *(minimapscale / 100)) ;
+minimapheight = (200 *(minimapscale / 100)) ;
 viewwidth = window_get_width();
 viewheight = window_get_height();
 
-minimapstartx = viewwidth - minimapwidth;
-minimapstarty = viewheight - minimapheight;
+minimapstartx = viewwidth - minimapwidth - 5;
+minimapstarty = viewheight - minimapheight - 5;
 minimapratiox = room_width / minimapwidth ;
 minimapratioy = room_height / minimapheight ;
 draw_rectangle(minimapstartx,minimapstarty,viewwidth - 5,viewheight - 5,1);
@@ -754,16 +754,16 @@ if count &gt; 0
             {
             if theirteam = team
             {
-            draw_circle_colour(minimappositionx,minimappositiony,5,c_red,c_red,0)
+            draw_circle_colour(minimappositionx,minimappositiony,3,c_blue,c_blue,0)
             }
             else    
             {
-            draw_circle_colour(minimappositionx,minimappositiony,5,c_blue,c_blue,0)
+            draw_circle_colour(minimappositionx,minimappositiony,3,c_red,c_red,0)
             }
             }
             else
             {
-            draw_circle_colour(minimappositionx,minimappositiony,5,c_green,c_green,0)
+            draw_circle_colour(minimappositionx,minimappositiony,3,c_green,c_green,0)
             }
     }
     }
