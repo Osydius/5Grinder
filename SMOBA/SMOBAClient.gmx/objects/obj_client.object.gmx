@@ -73,8 +73,22 @@ eAbility = "";
 rAbility = "";
 spaceAbility = "";
 
-
+//minimap vaariables
 minimapscale = 100
+minimapwidth = (200 *(minimapscale / 100)) ;
+minimapheight = (200 *(minimapscale / 100)) ;
+viewwidth = window_get_width();
+viewheight = window_get_height();
+viewtowindowx = 1
+viewtowindowy = 1
+minimapstartx = viewwidth - minimapwidth - 5;
+minimapstarty = viewheight - minimapheight - 5;
+minimapratiox = room_width / minimapwidth ;
+minimapratioy = room_height / minimapheight ;
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -174,6 +188,9 @@ network_send_packet( client, buff, buffer_size )
 }
     
     
+
+viewwidth = window_get_width();
+viewheight = window_get_height();
 </string>
           </argument>
         </arguments>
@@ -219,8 +236,22 @@ var distance_y
 
 if mouse_check_button(mb_right)
 {
+
+
+    if (mouse_x - view_xview &gt; minimapstartx) and (mouse_x - view_xview &lt; view_wview[0]-5) and (mouse_y - view_yview &gt; minimapstarty/viewtowindowy) and (mouse_y - view_yview &lt; (view_hview[0] - 5)/viewtowindowy)
+    {
+    destination_x = (mouse_x - view_xview - minimapstartx) * minimapratiox
+    destination_y = (((mouse_y - (view_yview)- minimapstarty) ) * minimapratioy) / viewtowindowy
+    }
+    else
+    {
     destination_x = mouse_x
     destination_y = mouse_y
+    }
+    
+    
+    
+    
     adjacent = abs(player_x - destination_x);
     opposite = abs(player_y - destination_y);
     
@@ -425,6 +456,8 @@ total_bullets = ds_map_size(bullets);
 
 view_xview[0] = player_x - (view_wview[0]/2);
 view_yview[0] = player_y - (view_hview[0]/2);
+viewtowindowx = viewwidth / view_wview[0];
+viewtowindowy = viewheight / view_hview[0]; 
 </string>
           </argument>
         </arguments>
@@ -726,16 +759,9 @@ if login = 1
           <argument>
             <kind>1</kind>
             <string>// **MOVE INTO SCRIPT** Minimap
+draw_text(100,10,destination_x)
+draw_text(100,50,destination_y)
 
-minimapwidth = (200 *(minimapscale / 100)) ;
-minimapheight = (200 *(minimapscale / 100)) ;
-viewwidth = window_get_width();
-viewheight = window_get_height();
-
-minimapstartx = viewwidth - minimapwidth - 5;
-minimapstarty = viewheight - minimapheight - 5;
-minimapratiox = room_width / minimapwidth ;
-minimapratioy = room_height / minimapheight ;
 draw_rectangle(minimapstartx,minimapstarty,viewwidth - 5,viewheight - 5,1);
 count = ds_list_size(clients_name)
 if count &gt; 0
