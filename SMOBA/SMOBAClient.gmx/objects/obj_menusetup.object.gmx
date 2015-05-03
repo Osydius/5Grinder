@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>teamred = 1
+            <string>application_surface_enable(false);
+
+teamred = 1
 teamblue = 0
 
 captain = "captain1"

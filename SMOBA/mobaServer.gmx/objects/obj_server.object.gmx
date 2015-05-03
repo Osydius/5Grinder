@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// create the server
+            <string>application_surface_enable(false);
+
+// create the server
 server = network_create_server(network_socket_tcp, 6510, 32)
 buff = buffer_create(16384, buffer_fixed, 1);
 
