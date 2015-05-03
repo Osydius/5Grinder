@@ -37,7 +37,7 @@ clients_health = ds_list_create()
 clients_team = ds_list_create()
 clients_captain = ds_list_create()
 clients_ship = ds_list_create()
-clinets_rotation = ds_list_create()
+clients_rotation = ds_list_create()
 
 randomize() // This will create a random seed, it's just to make sure that randoms are random lol, it will be usefull for a random player name
 setup=1
@@ -49,7 +49,6 @@ selfhealth = 100
 click_direction = 0
 
 bullets = ds_map_create();
-new_bullets = ds_map_create();
 
 player_x = 100
 player_y = 100
@@ -59,7 +58,7 @@ destination_y = 100
 ratio_x = 0;
 ratio_y = 0;
 
-team = "teamred"
+team = "teamBroke"
 damage = 10
 lasthit = -1
 captain = "captain"
@@ -104,6 +103,7 @@ buffer_write(buff , buffer_s16, selfhealth)
 buffer_write(buff , buffer_string, team)
 buffer_write(buff , buffer_string, captain)
 buffer_write(buff , buffer_string, ship)
+buffer_write(buff, buffer_s16, image_angle)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
 login=1
@@ -314,7 +314,8 @@ repeat(ratio_y)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>total_bullets = ds_map_size(bullets);
+            <string>/*
+total_bullets = ds_map_size(bullets);
         if total_bullets&gt;0
             {
             bullet_key = ds_map_find_first(bullets);
@@ -351,6 +352,7 @@ repeat(ratio_y)
                 bullet_key = ds_map_find_next(bullets,bullet_key)
                 }
             }
+        */
 </string>
           </argument>
         </arguments>
@@ -638,13 +640,13 @@ if login = 1
                 create_team = buffer_read(net_buff, buffer_string);
                 create_damage = buffer_read(net_buff, buffer_u16);
                 
-                if(ds_map_find_value(new_bullets,create_id)!= undefined){
-                    existing_bullet = ds_map_find_value(new_bullets,create_id);
+                if(ds_map_find_value(bullets,create_id)!= undefined){
+                    existing_bullet = ds_map_find_value(bullets,create_id);
                     existing_bullet.x = create_x;
                     existing_bullet.y = create_y;
                 } else {
                     new_bullet = instance_create(create_x,create_y,obj_bullet);
-                    ds_map_add(new_bullets,create_id,new_bullet);
+                    ds_map_add(bullets,create_id,new_bullet);
                     new_bullet.bullet_id = create_id;
                     new_bullet.bullet_x = create_x;
                     new_bullet.bullet_y = create_y;
@@ -734,7 +736,7 @@ if count &gt; 0
             theirrotation = ds_list_find_value(clients_rotation,i)//rotation
             if name != client_name
                 {
-                draw_sprite_ext(theirship,-1,xx,yy,1,1,theirrotation,c_white,1)
+                draw_sprite_ext(spr_battleship,-1,xx,yy,1,1,theirrotation,c_white,1)
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_middle)
                 draw_text(xx,yy-32,name)
@@ -743,7 +745,7 @@ if count &gt; 0
                 }
             }
     }
-    
+/*
 b_count = ds_map_size(bullets)
 if count &gt; 0
     bullet_key = ds_map_find_first(bullets)
@@ -755,11 +757,11 @@ if count &gt; 0
             bullet_id = ds_map_find_value(bullet,"id")
             bullet_x = ds_map_find_value(bullet,"x")
             bullet_y = ds_map_find_value(bullet,"y")
-            bullet_direction = ds_map_find_value(bullet,"direction")
+            bullet_direction = ds_map_find_value(bulletAngle,"direction")
             draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,(-bullet_direction) - 90 ,0,1)
         }
     } 
-    
+    */
 draw_sprite_ext(sprite_index,-1,player_x,player_y,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 draw_text(player_x,player_y + 50,selfhealth)
 draw_text(player_x,player_y + 20,team)

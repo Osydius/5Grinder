@@ -16,4 +16,3 @@ if team_count>0{
     }
 }
 
-

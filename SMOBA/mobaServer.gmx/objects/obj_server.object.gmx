@@ -241,6 +241,7 @@ else
         b_team=buffer_read(net_buff, buffer_string)
         b_captain=buffer_read(net_buff, buffer_string)
         b_ship=buffer_read(net_buff, buffer_string)
+        b_direction = buffer_read(net_buff, buffer_s16)
         ds_list_add(clients_sockets,sock)
         ds_list_add(clients_name,b_name)
         ds_list_add(clients_x,b_x)
@@ -249,6 +250,7 @@ else
         ds_list_add(clients_team, b_team)
         ds_list_add(clients_captain, b_captain)
         ds_list_add(clients_ship, b_ship)
+        ds_list_add(clients_direction, b_direction)
         //show_message(b_name+" joined at pos x:"+string(b_x)+" y:"+string(b_y))
         //show_message("list sizes, socket="+string(ds_list_size(clients_sockets))+" name="+string(ds_list_size(clients_name))+" x="+string(ds_list_size(clients_x))+" y="+string(ds_list_size(clients_y)))
     } 

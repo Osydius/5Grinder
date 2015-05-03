@@ -25,12 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bullet_id= "";
+            <string>bullet_id= -1;
 bullet_x = -1;
 bullet_y = -1;
 bullet_direction = 0;
 bullet_team = "";
 bullet_damage = 0;
+destroyed = false;
 </string>
           </argument>
         </arguments>
@@ -53,7 +54,7 @@ bullet_damage = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (collision_rectangle(x-1,y-5,x+1,y+5,obj_obstacle,true,true)){
+            <string>if (collision_rectangle(x-1,y-5,x+1,y+5,obj_obstacle,false,true)){
     if instance_exists(obj_client){
         buff = obj_client.buff;
         client = obj_client.client;
@@ -62,8 +63,9 @@ bullet_damage = 0;
         buffer_write(buff , buffer_u16, bullet_id)
         buffer_size = buffer_tell(buff)
         network_send_packet( client, buff, buffer_size )
-        ds_map_delete(obj_client.new_bullets,bullet_id);
+        ds_map_delete(obj_client.bullets,bullet_id);
         instance_destroy();
+        destroyed = true;
     }
 }
 </string>
@@ -88,7 +90,11 @@ bullet_damage = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_bullet,-1,x,y,1,1,-(bullet_direction)+90,0,1);
+            <string>if destroyed == false{
+draw_sprite_ext(spr_bullet,-1,x,y,1,1,-(bullet_direction)+90,0,1);
+} else {
+    draw_sprite(spr_player,-1,x,y);
+}
 </string>
           </argument>
         </arguments>
