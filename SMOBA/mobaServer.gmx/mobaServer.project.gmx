@@ -25,6 +25,8 @@
       <script>scripts\client_get_map.gml</script>
       <script>scripts\send_players.gml</script>
       <script>scripts\update_player_movement.gml</script>
+      <script>scripts\create_bullet.gml</script>
+      <script>scripts\send_bullets.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">

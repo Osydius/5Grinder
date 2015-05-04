@@ -249,6 +249,51 @@ viewheight = window_get_height();
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>Normal Attack</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if login == 1 {
+    if mouse_check_button_pressed(mb_left){
+        create_bullet(buff,client,mouse_x,mouse_y);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>Bullet Collisions</string>
           </argument>
         </arguments>
@@ -309,26 +354,6 @@ total_bullets = ds_map_size(bullets);
             }
         */
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Obstacle Collisions</string>
           </argument>
         </arguments>
       </action>
@@ -527,6 +552,8 @@ if login = 1
         }
     } else if buff_info="map_objects" {
         map_objects(net_buff);
+    } else if buff_info ="all_bullets" {
+        all_bullets(net_buff);
     }
 }
 </string>

@@ -37,6 +37,8 @@
       <script>scripts\map_objects.gml</script>
       <script>scripts\move_player.gml</script>
       <script>scripts\all_players.gml</script>
+      <script>scripts\create_bullet.gml</script>
+      <script>scripts\all_bullets.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">

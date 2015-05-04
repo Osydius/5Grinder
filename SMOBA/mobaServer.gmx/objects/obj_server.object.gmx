@@ -39,7 +39,6 @@ map_height = 3200;
 clients = ds_map_create();
 
 // create weapon lists
-bullet_speed = 5
 bullets = ds_map_create();
 </string>
           </argument>
@@ -68,13 +67,12 @@ client_count = ds_map_size(clients);
 if client_count &gt; 0 {
     send_players(buff, client_count);
 }
+
 // send bullet info
-/*
 bullet_count = ds_map_size(bullets);
 if bullet_count &gt; 0 {
-    sendAllBullets(buff, bullet_count);
+    send_bullets(buff, bullet_count);
 }
-*/
 </string>
           </argument>
         </arguments>
@@ -180,6 +178,8 @@ if server = eventid {
         client_get_map(buff, sock);
     } else if buff_info = "move_player" {
         update_player_movement(net_buff, sock);
+    } else if buff_info == "create_bullet" {
+        create_bullet(net_buff, sock);
     }
     
     /*
