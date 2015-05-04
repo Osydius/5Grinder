@@ -5,7 +5,11 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_obstacle</sprite>
+    <sprite>sprites\spr_base</sprite>
+    <sprite>sprites\spr_player</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -16,16 +20,19 @@
         <script>scripts\readClientCreateBullet.gml</script>
         <script>scripts\readClientDestroyBullet.gml</script>
       </scripts>
-      <scripts name="write">
-        <script>scripts\sendAllBullets.gml</script>
-        <script>scripts\sendAllClientStatus.gml</script>
-        <script>scripts\sendTeams.gml</script>
-      </scripts>
-      <script>scripts\findClient.gml</script>
+      <script>scripts\check_name.gml</script>
+      <script>scripts\client_setup.gml</script>
+      <script>scripts\client_get_map.gml</script>
+      <script>scripts\send_players.gml</script>
+      <script>scripts\update_player_movement.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_server</object>
+    <object>objects\obj_obstacle</object>
+    <object>objects\obj_base</object>
+    <object>objects\obj_player</object>
+    <object>objects\obj_bullet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

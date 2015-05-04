@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>obj_menusetup.teamblue = 0
 obj_menusetup.teamred = 1
+obj_menusetup.team = "teamred";
 
 </string>
           </argument>

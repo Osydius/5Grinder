@@ -32,12 +32,18 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\bulletAngle.gml</script>
+    <scripts name="networking">
+      <script>scripts\client_get_map.gml</script>
+      <script>scripts\map_objects.gml</script>
+      <script>scripts\move_player.gml</script>
+      <script>scripts\all_players.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_menusetup</object>
     <object>objects\obj_client</object>
     <object>objects\obj_obstacle</object>
-    <object>objects\obj_map</object>
+    <object>objects\obj_player</object>
     <objects name="Team Menu">
       <object>objects\obj_teamblue</object>
       <object>objects\obj_teamred</object>

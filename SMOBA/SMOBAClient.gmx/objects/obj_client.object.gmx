@@ -30,25 +30,22 @@ network_connect( client, "92.232.198.126", 6510) // James Server
 //network_connect( client, "81.99.254.162", 6510) // Casey Server
 buff = buffer_create( 256, buffer_grow, 1)
 
-clients_name = ds_list_create()
-clients_x = ds_list_create()
-clients_y = ds_list_create()
-clients_health = ds_list_create()
-clients_team = ds_list_create()
-clients_captain = ds_list_create()
-clients_ship = ds_list_create()
-clients_rotation = ds_list_create()
+players = ds_map_create();
+client_name = "";
 
 randomize() // This will create a random seed, it's just to make sure that randoms are random lol, it will be usefull for a random player name
 setup=1
 login=0
 name_creation_phrase="Insert your character name :"// this will change case the name is being used
-alarm[0]=10 //i've put 10 just to give some time for the clients to connect to the server before sending packets
+//alarm[0]=10 //i've put 10 just to give some time for the clients to connect to the server before sending packets
 
 selfhealth = 100
 click_direction = 0
 
 bullets = ds_map_create();
+
+//get map
+client_get_map(buff, client);
 
 player_x = 100
 player_y = 100
@@ -111,16 +108,35 @@ minimapratioy = room_height / minimapheight ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>buffer_seek(buff, buffer_seek_start, 0)
+            <string>player_team = obj_menusetup.team;
+if(team == "teamblue"){
+    player_x = obj_waterplanet.x;
+    player_y = obj_waterplanet.y;
+} else {
+    player_x = obj_lavaplanet.x;
+    player_y = obj_lavaplanet.y;
+}
+
+player = instance_create(player_x,player_y,obj_player);
+player.player_name = client_name;
+player.player_x = player_x;
+player.player_y = player_y;
+player.player_team = player_team;
+player.player_captain = obj_menusetup.captain;
+player.player_ship = obj_menusetup.ship;
+
+ds_map_add(players,client_name,player);
+
+buffer_seek(buff, buffer_seek_start, 0)
 buffer_write(buff , buffer_string, "client_setup")
-buffer_write(buff , buffer_string, client_name)
-buffer_write(buff , buffer_s16, player_x)
-buffer_write(buff , buffer_s16, player_y)
-buffer_write(buff , buffer_s16, selfhealth)
-buffer_write(buff , buffer_string, team)
-buffer_write(buff , buffer_string, captain)
-buffer_write(buff , buffer_string, ship)
-buffer_write(buff , buffer_s16, image_angle)
+buffer_write(buff , buffer_string, player.player_name)
+buffer_write(buff , buffer_s16, player.player_x)
+buffer_write(buff , buffer_s16, player.player_y)
+buffer_write(buff , buffer_s16, player.player_health)
+buffer_write(buff , buffer_string, player.player_team)
+buffer_write(buff , buffer_string, player.player_captain)
+buffer_write(buff , buffer_string, player.player_ship)
+buffer_write(buff , buffer_s16, player.player_direction)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
 login=1
@@ -231,7 +247,13 @@ viewheight = window_get_height();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var distance_x
+            <string>if mouse_check_button(mb_right){
+    move_player(buff, client, mouse_x, mouse_y);
+}
+
+
+/*
+var distance_x
 var distance_y
 
 if mouse_check_button(mb_right)
@@ -452,12 +474,19 @@ total_bullets = ds_map_size(bullets);
     view_enabled = true;
     view_wview[0] = 1024;
     view_hview[0] = 1024;
+    view_xview[0] = 0;
+    view_yview[0] = 0;
 }
 
-view_xview[0] = player_x - (view_wview[0]/2);
-view_yview[0] = player_y - (view_hview[0]/2);
-viewtowindowx = viewwidth / view_wview[0];
-viewtowindowy = viewheight / view_hview[0]; 
+current_player = ds_map_find_value(players,ds_map_find_first(players));
+if(current_player){
+    view_xview[0] = current_player.player_x - (view_wview[0]/2);
+    view_yview[0] = current_player.player_y - (view_hview[0]/2);
+    viewtowindowx = viewwidth / view_wview[0];
+    viewtowindowy = viewheight / view_hview[0]; 
+}
+
+
 </string>
           </argument>
         </arguments>
@@ -624,116 +653,22 @@ if login = 1
     net_buff = ds_map_find_value(async_load, "buffer")
     buff_info = buffer_read(net_buff, buffer_string )
     
-    if buff_info == "all_clients"
-        {
-        count=buffer_read(net_buff , buffer_s16 )
-        ds_list_clear(clients_name)
-        ds_list_clear(clients_x)
-        ds_list_clear(clients_y)
-        ds_list_clear(clients_health)
-        ds_list_clear(clients_team)
-        ds_list_clear(clients_captain)
-        ds_list_clear(clients_ship)
-        ds_list_clear(clients_rotation)
-        for(i=0;i&lt;count;i++)
-            {
-            ds_list_add(clients_name,buffer_read(net_buff , buffer_string ))
-            ds_list_add(clients_x,buffer_read(net_buff , buffer_s16 ))
-            ds_list_add(clients_y,buffer_read(net_buff , buffer_s16 ))
-            ds_list_add(clients_health,buffer_read(net_buff , buffer_s16))
-            ds_list_add(clients_team,buffer_read(net_buff , buffer_string))
-            ds_list_add(clients_captain,buffer_read(net_buff , buffer_string))
-            ds_list_add(clients_ship,buffer_read(net_buff , buffer_string))
-            ds_list_add(clients_rotation,buffer_read(net_buff , buffer_s16))
-            }
-        }
     
-    else if buff_info="name_exists"
+    if buff_info == "all_players"{
+        all_players(net_buff);
+    } else if buff_info="name_exists"
         {
         setup=buffer_read(net_buff , buffer_bool )
-        if setup = 1
-            {
+        if setup = 1 {
             name_creation_phrase="Name already beeing used, please insert another name :"
             alarm[0]=1
-            }
-        if setup = 0
-            {
-            alarm[1]=1
-            show_message("Welcome "+client_name+"!")
-            }
         }
-  
-    else if buff_info="all_bullets" {
-        bullet_count = buffer_read(net_buff, buffer_s16);
-        if bullet_count&gt;0
-            {
-            for(i=0;i&lt;bullet_count;i++){
-                // get bullet info
-                create_id = buffer_read(net_buff, buffer_u16);
-                create_x = buffer_read(net_buff, buffer_s16);
-                create_y = buffer_read(net_buff, buffer_s16);
-                create_direction = buffer_read(net_buff, buffer_s16);
-                create_team = buffer_read(net_buff, buffer_string);
-                create_damage = buffer_read(net_buff, buffer_u16);
-                
-                if(ds_map_find_value(bullets,create_id)!= undefined){
-                    existing_bullet = ds_map_find_value(bullets,create_id);
-                    existing_bullet.x = create_x;
-                    existing_bullet.y = create_y;
-                } else {
-                    new_bullet = instance_create(create_x,create_y,obj_bullet);
-                    ds_map_add(bullets,create_id,new_bullet);
-                    new_bullet.bullet_id = create_id;
-                    new_bullet.bullet_x = create_x;
-                    new_bullet.bullet_y = create_y;
-                    new_bullet.bullet_direction = create_direction;
-                    new_bullet.bullet_team = create_team;
-                    new_bullet.bullet_damage = create_damage;
-                }
-                
-            }
+        if setup = 0 {
+            alarm[1] = 1;
+            //show_message("Welcome "+client_name+"!")
         }
-        /*
-        // empty bullet map
-        total_bullets = ds_map_size(bullets);
-        if total_bullets&gt;0
-            {
-            bullet_key = ds_map_find_first(bullets);
-            for(i=0;i&lt;total_bullets;i++){
-                bullet = ds_map_find_value(bullets,bullet_key);
-                ds_map_destroy(bullet);
-                bullet_key = ds_map_find_next(bullets, bullet_key);
-            }
-            }
-        ds_map_destroy(bullets);
-        bullets = ds_map_create()
-        
-        bullet_count = buffer_read(net_buff, buffer_s16);
-        if bullet_count&gt;0
-            {
-            for(i=0;i&lt;bullet_count;i++){
-                // get bullet info
-                create_id = buffer_read(net_buff, buffer_u16);
-                create_x = buffer_read(net_buff, buffer_s16);
-                create_y = buffer_read(net_buff, buffer_s16);
-                create_direction = buffer_read(net_buff, buffer_s16);
-                create_team = buffer_read(net_buff, buffer_string);
-                create_damage = buffer_read(net_buff, buffer_u16);
-                
-                // create bullet map
-                bullet = ds_map_create();
-                ds_map_add(bullet,"id",create_id);
-                ds_map_add(bullet,"x",create_x);
-                ds_map_add(bullet,"y",create_y);
-                ds_map_add(bullet,"direction",create_direction);
-                ds_map_add(bullet,"team",create_team);
-                ds_map_add(bullet,"damage",create_damage);
-                
-                ds_map_add(bullets,create_id,bullet);
-                
-            }
-            }
-            */
+    } else if buff_info="map_objects" {
+        map_objects(net_buff);
     }
 }
 </string>
@@ -758,7 +693,8 @@ if login = 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// **MOVE INTO SCRIPT** Minimap
+            <string>/*
+// **MOVE INTO SCRIPT** Minimap
 draw_text(100,10,destination_x)
 draw_text(100,50,destination_y)
 
@@ -793,7 +729,7 @@ if count &gt; 0
             }
     }
     }
-
+*/
 </string>
           </argument>
         </arguments>
@@ -816,7 +752,8 @@ if count &gt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>count = ds_list_size(clients_name)
+            <string>/*
+count = ds_list_size(clients_name)
 if count &gt; 0
     {
     for(i=0;i &lt; count;i++)
@@ -856,12 +793,13 @@ if count &gt; 0
             draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,(-bullet_direction) - 90 ,0,1)
         }
     } 
-    */
+
 draw_sprite_ext(sprite_index,-1,player_x,player_y,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 draw_text(player_x,player_y + 50,selfhealth)
 draw_text(player_x,player_y + 20,team)
+*/
 
 
 
