@@ -643,11 +643,11 @@ if login = 1
           <argument>
             <kind>1</kind>
             <string>
-draw_text(100,10,destination_x)
-draw_text(100,50,destination_y)
+
 
 draw_rectangle(minimapstartx,minimapstarty,viewwidth - 5,viewheight - 5,1);
 count = ds_map_size(obj_client.players);
+
 current_player_key = ds_map_find_first(obj_client.players);
 if count &gt; 0
     {
@@ -655,23 +655,24 @@ if count &gt; 0
             {
             currentplayer = ds_map_find_value(obj_client.players,current_player_key);
             name = current_player_key
-            xx=current_player.player_x//x
-            yy=current_player.player_y//y
-            theirteam = current_player.player_team//team
+            xx=currentplayer.player_x//x
+            yy=currentplayer.player_y//y
+            theirteam = currentplayer.player_team//team
+            draw_text(100,10,xx)
                 //draw_sprite_ext(asset_get_index("spr_" + theirship),-1,xx,yy,1,1,theirrotation,c_white,1)
             minimappositionx = minimapstartx + (xx / minimapratiox)
             minimappositiony = minimapstarty + (yy / minimapratioy)
             
             if name != client_name
             {
-            if theirteam = ds_map_find_value(obj_client.players,client_name).player_team
-            {
-            draw_circle_colour(minimappositionx,minimappositiony,3,c_blue,c_blue,0)
-            }
-            else    
-            {
-            draw_circle_colour(minimappositionx,minimappositiony,3,c_red,c_red,0)
-            }
+                if theirteam = ds_map_find_value(obj_client.players,client_name).player_team
+                    {
+                    draw_circle_colour(minimappositionx,minimappositiony,3,c_blue,c_blue,0)
+                    }
+                else    
+                    {
+                    draw_circle_colour(minimappositionx,minimappositiony,3,c_red,c_red,0)
+                    }
             }
             else
             {
