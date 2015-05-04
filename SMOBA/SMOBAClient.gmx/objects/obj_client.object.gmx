@@ -613,21 +613,22 @@ if login = 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-// **MOVE INTO SCRIPT** Minimap
+            <string>
 draw_text(100,10,destination_x)
 draw_text(100,50,destination_y)
 
 draw_rectangle(minimapstartx,minimapstarty,viewwidth - 5,viewheight - 5,1);
-count = ds_list_size(clients_name)
+count = ds_map_size(obj_client.players);
+current_player_key = ds_map_find_first(obj_client.players);
 if count &gt; 0
     {
     for(i=0;i &lt; count;i++)
             {
-            name = ds_list_find_value(clients_name,i) // name
-            xx=ds_list_find_value(clients_x,i)//x
-            yy=ds_list_find_value(clients_y,i)//y
-            theirteam = ds_list_find_value(clients_team,i)//team
+            currentplayer = ds_map_find_value(obj_client.players,current_player_key);
+            name = current_player_key
+            xx=current_player.player_x//x
+            yy=current_player.player_y//y
+            theirteam = current_player.player_team//team
                 //draw_sprite_ext(asset_get_index("spr_" + theirship),-1,xx,yy,1,1,theirrotation,c_white,1)
             minimappositionx = minimapstartx + (xx / minimapratiox)
             minimappositiony = minimapstarty + (yy / minimapratioy)
@@ -647,8 +648,20 @@ if count &gt; 0
             {
             draw_circle_colour(minimappositionx,minimappositiony,3,c_green,c_green,0)
             }
+            current_player_key = ds_map_find_next(obj_client.players,current_player_key);
     }
     }
+
+   /*
+    total_players = ds_map_size(obj_client.players);
+current_player_key = ds_map_find_first(obj_client.players);
+for(var i = 0; i &lt; total_players; i++) {
+    currentplayer = ds_map_find_value(obj_client.players,current_player_key);
+   current_player_x = current_player.player_x;
+
+   current_player_key = ds_map_find_next(obj_client.players,current_player_key);
+}
+
 */
 </string>
           </argument>
