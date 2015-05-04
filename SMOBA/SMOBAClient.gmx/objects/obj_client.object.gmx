@@ -398,7 +398,7 @@ total_bullets = ds_map_size(bullets);
     view_yview[0] = 0;
 }
 
-current_player = ds_map_find_value(players,ds_map_find_first(players));
+current_player = ds_map_find_value(players,client_name);
 if(current_player){
     view_xview[0] = current_player.player_x - (view_wview[0]/2);
     view_yview[0] = current_player.player_y - (view_hview[0]/2);
