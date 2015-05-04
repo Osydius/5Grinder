@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>application_surface_enable(false);
 
-team = "";
+team = "teamblue";
 
 captain = "captain1";
 
