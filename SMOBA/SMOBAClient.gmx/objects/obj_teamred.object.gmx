@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_menusetup.teamblue = 0
-obj_menusetup.teamred = 1
-obj_menusetup.team = "teamred";
+            <string>obj_menusetup.team = "teamred";
 
 </string>
           </argument>
@@ -51,7 +49,7 @@ obj_menusetup.team = "teamred";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if obj_menusetup.teamred = 0
+            <string>if obj_menusetup.team = "teamblue"
 draw_sprite(spr_teamred,0,x,y)
 else
 draw_sprite(spr_teamred,1,x,y)

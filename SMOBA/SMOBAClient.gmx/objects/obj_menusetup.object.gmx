@@ -28,12 +28,10 @@
             <string>application_surface_enable(false);
 
 team = "";
-teamred = 1
-teamblue = 0
 
-captain = "captain1"
+captain = "captain1";
 
-ship = "battleship"
+ship = "battleship";
 </string>
           </argument>
         </arguments>
@@ -65,30 +63,7 @@ ship = "battleship"
     }
     
     if(client.login == 1){
-        // set the team
-        if teamred = 1 {
-            client.team = "teamred"
-            client.player_x = instance_find(obj_lavaplanet,0).x;
-            client.player_y = instance_find(obj_lavaplanet,0).y;
-        } else {
-            client.team = "teamblue"
-            client.player_x = instance_find(obj_waterplanet,0).x;
-            client.player_y = instance_find(obj_waterplanet,0).y;
-        }
-        
-        // set the captain
-        client.captain = captain;
-        
-        // set the ship
-        client.ship = ship;
-        
-        if ship == "battleship" {
-            client.sprite_index = spr_battleship;
-        } else if ship == "recon" {
-            client.sprite_index = spr_recon;
-        }
-        
-        instance_destroy()
+       instance_destroy()
     }
     
 }
