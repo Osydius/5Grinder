@@ -109,7 +109,7 @@ minimapratioy = room_height / minimapheight ;
           <argument>
             <kind>1</kind>
             <string>player_team = obj_menusetup.team;
-if(team == "teamblue"){
+if(player_team == "teamblue"){
     player_x = obj_waterplanet.x;
     player_y = obj_waterplanet.y;
 } else {
@@ -616,6 +616,8 @@ if login = 1
         map_objects(net_buff);
     } else if buff_info ="all_bullets" {
         all_bullets(net_buff);
+    } else if buff_info = "remove_player" {
+        remove_player(net_buff);
     }
 }
 </string>
@@ -662,7 +664,7 @@ if count &gt; 0
             
             if name != client_name
             {
-            if theirteam = team
+            if theirteam = ds_map_find_value(obj_client.players,client_name).player_team
             {
             draw_circle_colour(minimappositionx,minimappositiony,3,c_blue,c_blue,0)
             }

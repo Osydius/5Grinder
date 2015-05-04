@@ -156,10 +156,14 @@ if server = eventid {
     t = ds_map_find_value(async_load, "type");
     sock = ds_map_find_value(async_load, "socket");
 
-
     if( t!=network_type_connect){
         client=ds_map_find_value(clients, sock)
         //show_message(ds_list_find_value(clients_name, index)+" disconected")
+        buffer_seek(buff, buffer_seek_start, 0)
+        buffer_write(buff, buffer_string, "remove_player")
+        buffer_write(buff, buffer_string, client.player_name)
+        var buffer_size = buffer_tell(buff);
+        network_send_packet( sock, buff, buffer_size );
         with(client){
             instance_destroy();
         }
