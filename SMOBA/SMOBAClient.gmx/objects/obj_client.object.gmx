@@ -117,26 +117,16 @@ if(team == "teamblue"){
     player_y = obj_lavaplanet.y;
 }
 
-player = instance_create(player_x,player_y,obj_player);
-player.player_name = client_name;
-player.player_x = player_x;
-player.player_y = player_y;
-player.player_team = player_team;
-player.player_captain = obj_menusetup.captain;
-player.player_ship = obj_menusetup.ship;
-
-ds_map_add(players,client_name,player);
-
 buffer_seek(buff, buffer_seek_start, 0)
 buffer_write(buff , buffer_string, "client_setup")
-buffer_write(buff , buffer_string, player.player_name)
-buffer_write(buff , buffer_s16, player.player_x)
-buffer_write(buff , buffer_s16, player.player_y)
-buffer_write(buff , buffer_s16, player.player_health)
-buffer_write(buff , buffer_string, player.player_team)
-buffer_write(buff , buffer_string, player.player_captain)
-buffer_write(buff , buffer_string, player.player_ship)
-buffer_write(buff , buffer_s16, player.player_direction)
+buffer_write(buff , buffer_string, client_name)
+buffer_write(buff , buffer_s16, player_x)
+buffer_write(buff , buffer_s16, player_y)
+buffer_write(buff , buffer_s16, 100)
+buffer_write(buff , buffer_string, player_team)
+buffer_write(buff , buffer_string, obj_menusetup.captain)
+buffer_write(buff , buffer_string, obj_menusetup.ship)
+buffer_write(buff , buffer_s16, 0)
 buffer_size = buffer_tell(buff)
 network_send_packet( client, buff, buffer_size )
 login=1
@@ -191,21 +181,7 @@ network_send_packet( client, buff, buffer_size )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if login=1{
-    buffer_seek(buff, buffer_seek_start, 0);
-    buffer_write(buff , buffer_string, "client_status");
-    buffer_write(buff , buffer_s16, player_x);
-    buffer_write(buff , buffer_s16, player_y);
-    buffer_write(buff , buffer_s16, selfhealth);
-    buffer_write(buff , buffer_s16, image_angle);
-    
-    buffer_size = buffer_tell(buff);
-    network_send_packet( client, buff, buffer_size );
-}
-    
-    
-
-viewwidth = window_get_width();
+            <string>viewwidth = window_get_width();
 viewheight = window_get_height();
 </string>
           </argument>
@@ -247,9 +223,12 @@ viewheight = window_get_height();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if mouse_check_button(mb_right){
-    move_player(buff, client, mouse_x, mouse_y);
+            <string>if login = 1 {
+    if mouse_check_button(mb_right){
+        move_player(buff, client, mouse_x, mouse_y);
+    }
 }
+
 </string>
           </argument>
         </arguments>
@@ -398,13 +377,16 @@ total_bullets = ds_map_size(bullets);
     view_yview[0] = 0;
 }
 
-current_player = ds_map_find_value(players,client_name);
-if(current_player){
-    view_xview[0] = current_player.player_x - (view_wview[0]/2);
-    view_yview[0] = current_player.player_y - (view_hview[0]/2);
-    viewtowindowx = viewwidth / view_wview[0];
-    viewtowindowy = viewheight / view_hview[0]; 
+if login = 1 {
+    current_player = ds_map_find_value(players,client_name);
+    if(current_player){
+        view_xview[0] = current_player.player_x - (view_wview[0]/2);
+        view_yview[0] = current_player.player_y - (view_hview[0]/2);
+        viewtowindowx = viewwidth / view_wview[0];
+        viewtowindowy = viewheight / view_hview[0]; 
+    }
 }
+
 
 
 </string>
@@ -463,52 +445,6 @@ if(current_player){
         </arguments>
       </action>
     </event>
-    <event eventtype="5" enumb="40">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>selfhealth -= 5
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="5" enumb="38">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>selfhealth += 5
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
@@ -526,7 +462,8 @@ if(current_player){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var point1_x = player_x
+            <string>/*
+var point1_x = player_x
 var point1_y = player_y
 var point2_x = mouse_x
 var point2_y = mouse_y
@@ -546,6 +483,7 @@ if login = 1
     buffer_size = buffer_tell(buff)
     network_send_packet( client, buff, buffer_size )
     }
+    */
 </string>
           </argument>
         </arguments>

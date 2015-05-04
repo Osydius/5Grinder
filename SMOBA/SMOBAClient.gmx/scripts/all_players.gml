@@ -1,7 +1,6 @@
 net_buff = argument[0];
 
 total_players = buffer_read(net_buff,buffer_u8);
-player_key = ds_map_find_first(obj_client.players);
 for(var i = 0; i < total_players; i++) {
     p_name = buffer_read(net_buff, buffer_string);
     p_x = buffer_read(net_buff, buffer_s16);
@@ -12,9 +11,8 @@ for(var i = 0; i < total_players; i++) {
     p_captain = buffer_read(net_buff, buffer_string);
     p_ship = buffer_read(net_buff, buffer_string);
     
-    if(ds_map_find_value(obj_client.players,player_key) != undefined){
-        player = ds_map_find_value(obj_client.players,player_key);
-    } else {
+    player = ds_map_find_value(obj_client.players,p_name);
+    if(player == undefined){
         player = instance_create(p_x,p_y,obj_player);
         ds_map_add(obj_client.players,p_name,player);
     }
@@ -27,6 +25,4 @@ for(var i = 0; i < total_players; i++) {
     player.player_team = p_team;
     player.player_captain = p_captain;
     player.player_ship = p_ship;
-    
-    player_key = ds_map_find_next(obj_client.players,player_key);
 }
