@@ -25,49 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bullet_id= -1;
-bullet_x = -1;
-bullet_y = -1;
+            <string>bullet_id= 0;
+bullet_x = 0;
+bullet_y = 0;
 bullet_direction = 0;
-bullet_team = "";
-bullet_damage = 0;
-destroyed = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (collision_rectangle(x-1,y-5,x+1,y+5,obj_obstacle,false,true)){
-    if instance_exists(obj_client){
-        buff = obj_client.buff;
-        client = obj_client.client;
-        buffer_seek(buff, buffer_seek_start, 0)
-        buffer_write(buff , buffer_string, "client_destroy_bullet")
-        buffer_write(buff , buffer_u16, bullet_id)
-        buffer_size = buffer_tell(buff)
-        network_send_packet( client, buff, buffer_size )
-        ds_map_delete(obj_client.bullets,bullet_id);
-        instance_destroy();
-        destroyed = true;
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -90,11 +51,7 @@ destroyed = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if destroyed == false{
-draw_sprite_ext(spr_bullet,-1,x,y,1,1,-(bullet_direction)+90,0,1);
-} else {
-    draw_sprite(spr_player,-1,x,y);
-}
+            <string>draw_sprite_ext(spr_bullet,-1,bullet_x,bullet_y,1,1,-(bullet_direction)+90,image_blend,image_alpha);
 </string>
           </argument>
         </arguments>

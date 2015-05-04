@@ -96,6 +96,7 @@ if bullet_count &gt; 0 {
           <argument>
             <kind>1</kind>
             <string>// update bullets
+/*
 total_bullets = ds_map_size(bullets);
 if total_bullets&gt;0 {
     bullet_key = ds_map_find_first(bullets);

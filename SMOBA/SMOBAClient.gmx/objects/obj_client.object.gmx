@@ -307,90 +307,9 @@ viewheight = window_get_height();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if login == 1 {
-    if mouse_check_button_pressed(mb_left){
-        create_bullet(buff,client,mouse_x,mouse_y);
-    }
+            <string>if mouse_check_button_pressed(mb_left){
+    create_bullet(buff,client,mouse_x,mouse_y);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Bullet Collisions</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/*
-total_bullets = ds_map_size(bullets);
-        if total_bullets&gt;0
-            {
-            bullet_key = ds_map_find_first(bullets);
-            for(i=0;i&lt;total_bullets;i++)
-                {
-                bullet = ds_map_find_value(bullets,bullet_key)
-                bullet_id = ds_map_find_value(bullet,"id")
-                bullet_x = ds_map_find_value(bullet,"x")
-                bullet_y = ds_map_find_value(bullet,"y")
-                bullet_team = ds_map_find_value(bullet,"team")
-                bullet_damage = ds_map_find_value(bullet,"damage")
-                
-                //collision
-                
-                if (bullet_x &gt; (player_x - 10)) &amp; (bullet_x &lt; (player_x + 10)) &amp; (bullet_y &gt; (player_y - 10)) &amp; (bullet_y &lt; (player_y + 10))
-                {
-                    if login = 1 and (bullet_team != team) and (bullet_id != lasthit)
-                        {
-                        buffer_seek(buff, buffer_seek_start, 0)
-                        buffer_write(buff , buffer_string, "client_destroy_bullet")
-                        buffer_write(buff , buffer_u16, bullet_key)
-                        buffer_size = buffer_tell(buff)
-                        network_send_packet( client, buff, buffer_size )
-                        bullet = ds_map_find_value(bullets,bullet_key);
-                        if bullet{
-                            ds_map_destroy(bullet);
-                            ds_map_delete(bullets,bullet_key);
-                            selfhealth -= bullet_damage;
-                            lasthit = bullet_id
-                        }
-                        
-                        }
-                }
-                bullet_key = ds_map_find_next(bullets,bullet_key)
-                }
-            }
-        */
 </string>
           </argument>
         </arguments>
@@ -546,48 +465,6 @@ if(current_player){
           <argument>
             <kind>1</kind>
             <string>selfhealth += 5
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var point1_x = player_x
-var point1_y = player_y
-var point2_x = mouse_x
-var point2_y = mouse_y
-
-click_direction = bulletAngle(point1_x,point1_y,point2_x,point2_y);
-
-
-
-
-if login = 1
-    {
-    buffer_seek(buff, buffer_seek_start, 0)
-    buffer_write(buff , buffer_string, "client_create_bullet")
-    buffer_write(buff , buffer_s16, click_direction)
-    buffer_write(buff, buffer_string, team)
-    buffer_write(buff, buffer_u16, damage)
-    buffer_size = buffer_tell(buff)
-    network_send_packet( client, buff, buffer_size )
-    }
 </string>
           </argument>
         </arguments>
