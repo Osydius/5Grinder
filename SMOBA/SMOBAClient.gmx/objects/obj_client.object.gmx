@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>client = network_create_socket (network_socket_tcp)
-network_connect( client, "92.232.198.126", 6510) // James Server
-//network_connect( client, "81.99.254.162", 6510) // Casey Server
+//network_connect( client, "92.232.198.126", 6510) // James Server
+network_connect( client, "81.99.254.162", 6510) // Casey Server
 buff = buffer_create( 256, buffer_grow, 1)
 
 players = ds_map_create();
@@ -248,7 +248,24 @@ viewheight = window_get_height();
           <argument>
             <kind>1</kind>
             <string>if mouse_check_button(mb_right){
+
+    if (((mouse_x - view_xview[0])*viewtowindowx) &gt; minimapstartx ) and 
+       (((mouse_x - view_xview[0])*viewtowindowx) &lt; view_wview[0] - 5 ) and
+       (((mouse_y - view_yview[0])*viewtowindowy) &gt; minimapstarty ) and
+       (((mouse_y - view_yview[0])) &lt; view_hview[0] - 5 )
+       {
+       destination_x = (((mouse_x - view_xview[0])*viewtowindowx) - minimapstartx) * minimapratiox
+       destination_y = (((mouse_y - view_yview[0])*viewtowindowy) - minimapstarty) * minimapratioy
+       move_player(buff, client, destination_x, destination_y);
+       }
+
+    else
+    {
     move_player(buff, client, mouse_x, mouse_y);
+    }
+
+
+    
 }
 </string>
           </argument>
@@ -644,7 +661,6 @@ if login = 1
             <kind>1</kind>
             <string>
 
-
 draw_rectangle(minimapstartx,minimapstarty,viewwidth - 5,viewheight - 5,1);
 count = ds_map_size(obj_client.players);
 
@@ -658,7 +674,6 @@ if count &gt; 0
             xx=currentplayer.player_x//x
             yy=currentplayer.player_y//y
             theirteam = currentplayer.player_team//team
-            draw_text(100,10,xx)
                 //draw_sprite_ext(asset_get_index("spr_" + theirship),-1,xx,yy,1,1,theirrotation,c_white,1)
             minimappositionx = minimapstartx + (xx / minimapratiox)
             minimappositiony = minimapstarty + (yy / minimapratioy)
