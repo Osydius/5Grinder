@@ -39,6 +39,7 @@
     </scripts>
     <scripts name="obstacles">
       <script>scripts\scr_obstacle.gml</script>
+    </scripts>
     <scripts name="Dungeoneering">
       <script>scripts\scr_createDungeon.gml</script>
     </scripts>
