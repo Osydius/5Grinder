@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>client = network_create_socket (network_socket_tcp)
-//network_connect( client, "92.232.198.126", 6510) // James Server
-network_connect( client, "81.99.254.162", 6510) // Casey Server
+            <string>client_get_map = network_create_socket (network_socket_tcp)
+network_connect( client, "92.232.198.126", 6510) // James Server
+//network_connect( client, "81.99.254.162", 6510) // Casey Server
 buff = buffer_create( 256, buffer_grow, 1)
 
 players = ds_map_create();

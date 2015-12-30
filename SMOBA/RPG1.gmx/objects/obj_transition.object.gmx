@@ -25,24 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bullet_id = 0;
-bullet_x = 0;
-bullet_y = 0;
-bullet_direction = 0;
-bullet_damage = 0;
-bullet_team = "";
-
-bullet_destination_x = 0;
-bullet_destination_y = 0;
-
-bullet_speed = 2;
-bullet_angle = 0;
+            <string>scr_transitionCreate(id);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -59,50 +48,7 @@ bullet_angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// change direction of player
-player_direction = point_direction(bullet_x,bullet_y,bullet_destination_x,bullet_destination_y) - 90;
-
-// move the player
-adjacent = abs(bullet_x - bullet_destination_x);
-opposite = abs(bullet_y - bullet_destination_y);
-
-if(adjacent != 0){
-    bullet_angle = arctan(opposite/adjacent);
-} else {
-    bullet_angle = 0;
-}
-ratio_x = floor(cos(bullet_angle)*bullet_speed);
-ratio_y = floor(sin(bullet_angle)*bullet_speed);
-
-// move the player horizontally
-if bullet_x &gt; bullet_destination_x{
-    repeat(ratio_x){
-        if (bullet_x != bullet_destination_x) and place_free(bullet_x - 1, bullet_y){
-            bullet_x -= 1
-        }
-    }
-} else {
-    repeat(ratio_x){
-        if (bullet_x != bullet_destination_x)and place_free(bullet_x + 1, bullet_y){
-            bullet_x += 1
-        }
-    }
-}
-
-//move the player vertically
-if (bullet_y &gt; bullet_destination_y){
-    repeat(ratio_y){
-        if (bullet_y != bullet_destination_y) and place_free(bullet_x , bullet_y - 1){
-            bullet_y -= 1
-        }
-    }
-} else {
-    repeat(ratio_y){
-        if (bullet_y != bullet_destination_y)and place_free(bullet_x , bullet_y + 1){
-            bullet_y += 1
-        }
-    }
-}
+            <string>scr_transitionDraw(id);
 </string>
           </argument>
         </arguments>
