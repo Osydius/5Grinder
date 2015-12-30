@@ -8,13 +8,8 @@ var lastRoom = global.lastRoom;
 player.image_speed = 0;
 player.image_index = 0;
 
+player.initialised = false;
 
-with(obj_transition){
-    if(targetRoom == lastRoom){
-        player.x = x;
-        player.y = y;
-    }
-}
 
 #define scr_playerStep
 ///playerStep(instance_id)

@@ -28,7 +28,7 @@ global.townWidth = room_width/32;
 global.townHeight = room_height/32;
 global.townGrid = ds_grid_create(global.townWidth, global.townHeight);
 for(i=0;i<ds_grid_width(global.townGrid);i++){
-    for(k=0;j<ds_grid_height(global.townGrid);j++){
+    for(j=0;j<ds_grid_height(global.townGrid);j++){
         var plotInfo = ds_map_create();
         ds_map_add(plotInfo,"occupied",false);
         ds_map_add(plotInfo,"plotSize","");

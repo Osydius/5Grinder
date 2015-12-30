@@ -11,6 +11,20 @@ transition.targetRoom = "";
 transition.rotation = 0;
 
 #define scr_transitionStep
+var transition = argument[0];
+
+var player = instance_find(obj_player,0);
+if(player != noone){
+    if(!player.initialised){
+        var lastRoom = global.lastRoom;
+        if(transition.targetRoom == lastRoom){
+            player.x = transition.x;
+            player.y = transition.y;
+            player.initialised = true;
+        }
+    }
+}
+
 
 #define scr_transitionDraw
 var transition = argument[0];
