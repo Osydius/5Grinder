@@ -39,6 +39,8 @@
     </scripts>
     <scripts name="obstacles">
       <script>scripts\scr_obstacle.gml</script>
+    <scripts name="Dungeoneering">
+      <script>scripts\scr_createDungeon.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -60,9 +62,11 @@
     <objects name="buildPlots">
       <object>objects\obj_buildPlot_96x96</object>
     </objects>
+    <object>objects\obj_dungeonCreator</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_initialRoom</room>
+    <room>rooms\rm_dungeon</room>
     <room>rooms\rm_test1</room>
     <room>rooms\rm_test2</room>
     <room>rooms\rm_test3</room>
