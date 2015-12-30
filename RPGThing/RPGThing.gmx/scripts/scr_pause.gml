@@ -21,6 +21,6 @@ if(keyboard_check_released(vk_space)){
 #define scr_pauseDraw
 var pauser = argument[0];
 if(surface_exists(pauser.pauseSurf)){
-    if surface_exists(pauser.pauseSurf){draw_surface(pauser.pauseSurf,view_xview[0],view_yview[0]);}
+    draw_surface(pauser.pauseSurf,view_xview[0],view_yview[0]);
     draw_text(100,100,"paused");
 }

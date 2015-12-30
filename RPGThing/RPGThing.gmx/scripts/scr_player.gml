@@ -76,8 +76,17 @@ if(keyboard_check_released(vk_down) || keyboard_check_released(ord('S'))){
     }
 }
 
+// Pause menu keys
 if(keyboard_check_released(vk_space)){
     instance_create(-32,-32,obj_pause);
+}
+
+if(ds_map_exists(global.roomMap, global.townRoom)){
+    if(room_get_name(room) == global.townRoom){
+        if(keyboard_check_released(ord('B'))){
+            instance_create(-32,-32,obj_buildPause);
+        }
+    }
 }
 
 #define scr_playerTransition
@@ -86,10 +95,12 @@ var gridWidth = global.gridWidth;
 var gridHeight = global.gridHeight;
 
 var transitionInstance = instance_position(player.x, player.y, obj_transition);
-var targetRoom = transitionInstance.targetRoom;
-if(room_exists(ds_map_find_value(global.roomMap,transitionInstance.targetRoom))){
-    global.lastRoom = room_get_name(room);
-    room_goto(ds_map_find_value(global.roomMap, transitionInstance.targetRoom));
-} else {
-    transitionInstance.displayRoomError = true;
+if(object_get_name(transitionInstance) != "obj_oneWayTransition"){
+    var targetRoom = transitionInstance.targetRoom;
+    if(room_exists(ds_map_find_value(global.roomMap,transitionInstance.targetRoom))){
+        global.lastRoom = room_get_name(room);
+        room_goto(ds_map_find_value(global.roomMap, transitionInstance.targetRoom));
+    } else {
+        transitionInstance.displayRoomError = true;
+    }
 }

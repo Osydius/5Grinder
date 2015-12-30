@@ -12,7 +12,7 @@ global.gridHeight = 32;
 global.playerHealth = 100;
 global.playerLevel = 0;
 global.playerProgress = 0;
-global.lastRoom = "";
+global.lastRoom = "rm_initialRoom";
 
 // Create empty player inventory
 global.playerInventory = ds_map_create();
@@ -23,7 +23,8 @@ ds_map_add(global.playerInventory,"currency",0);
 var playerBag = ds_list_create();
 ds_map_add(global.playerInventory,"bag",playerBag);
 
-// Set town information
+// Set town plot information
+global.townRoom = "rm_buildTest";
 global.townWidth = room_width/32;
 global.townHeight = room_height/32;
 global.townGrid = ds_grid_create(global.townWidth, global.townHeight);
@@ -38,6 +39,16 @@ for(i=0;i<ds_grid_width(global.townGrid);i++){
     }
 }
 
+// Set building information
+global.buildingList = ds_list_create();
+ds_list_add(global.buildingList, "forestry");
+ds_list_add(global.buildingList, "quarry");
+ds_list_add(global.buildingList, "playerHome");
+ds_list_add(global.buildingList, "citizenHome");
+ds_list_add(global.buildingList, "inn");
+ds_list_add(global.buildingList, "barracks");
+ds_list_add(global.buildingList, "blacksmith");
+
 // Create mapping for room referencing
 global.roomMap = ds_map_create();
 var currentRoom = room_first;
@@ -47,6 +58,8 @@ while(room_exists(currentRoom)){
     }
     currentRoom = room_next(currentRoom);
 }
+
+room_goto(ds_map_find_value(global.roomMap, "rm_test1"));
 
 #define scr_globalObj_step
 var globalObj = argument[0];

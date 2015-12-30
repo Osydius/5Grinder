@@ -6,29 +6,47 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_tree</sprite>
-    <sprite>sprites\spr_transition</sprite>
     <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_oneWayTransition</sprite>
-    <sprite>sprites\spr_buildPlot_96x96</sprite>
-    <sprite>sprites\spr_buildPlot_96x64</sprite>
+    <sprites name="obstacles">
+      <sprite>sprites\spr_tree</sprite>
+    </sprites>
+    <sprites name="transitions">
+      <sprite>sprites\spr_transition</sprite>
+      <sprite>sprites\spr_oneWayTransition</sprite>
+    </sprites>
+    <sprites name="buildPlots">
+      <sprite>sprites\spr_buildPlot_96x96</sprite>
+      <sprite>sprites\spr_buildPlot_96x64</sprite>
+    </sprites>
+    <sprites name="menuGraphics">
+      <sprite>sprites\spr_menuArrow</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_player.gml</script>
-    <script>scripts\scr_obstacle.gml</script>
-    <script>scripts\scr_transition.gml</script>
     <script>scripts\scr_globalObj.gml</script>
-    <script>scripts\scr_pause.gml</script>
-    <script>scripts\scr_screen_capture.gml</script>
     <scripts name="buildPlots">
       <script>scripts\scr_buildPlot_96x96.gml</script>
     </scripts>
+    <scripts name="pausers">
+      <script>scripts\scr_pause.gml</script>
+      <script>scripts\scr_buildPause.gml</script>
+    </scripts>
+    <scripts name="transitions">
+      <script>scripts\scr_transition.gml</script>
+    </scripts>
+    <scripts name="obstacles">
+      <script>scripts\scr_obstacle.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
+    <object>objects\obj_globalObj</object>
+    <object>objects\obj_player</object>
     <objects name="pausers">
       <object>objects\obj_pause</object>
+      <object>objects\obj_buildPause</object>
     </objects>
     <objects name="obstacles">
       <object>objects\obj_obstacle</object>
@@ -39,13 +57,12 @@
       <object>objects\obj_outsideTransition</object>
       <object>objects\obj_oneWayTransition</object>
     </objects>
-    <object>objects\obj_globalObj</object>
-    <object>objects\obj_player</object>
     <objects name="buildPlots">
       <object>objects\obj_buildPlot_96x96</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_initialRoom</room>
     <room>rooms\rm_test1</room>
     <room>rooms\rm_test2</room>
     <room>rooms\rm_test3</room>
